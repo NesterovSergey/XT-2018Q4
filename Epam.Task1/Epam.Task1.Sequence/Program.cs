@@ -1,43 +1,44 @@
 ﻿using System;
 
-namespace Epam.Task2
+namespace Epam.Task1.Sequence
 {
     class Program
     {
         static void Main(string[] args)
         {
             int n;
+
+            Console.WriteLine("Enter a number: ");
             while (true)
             {
-                try
+                Console.Write(">> ");
+                if (!int.TryParse(Console.ReadLine(), out n))
                 {
-                    Console.Write(">> ");
-                    n = Convert.ToInt32(Console.ReadLine());
-                    if (n > 0)
-                    {
-                        break;
-                    }
-                    throw new Exception();
+                    Console.WriteLine("You had to enter a number");
                 }
-                catch
+                else if (n > 0)
                 {
-                    Console.WriteLine("Нужно положительное число");
+                    break;
                 }
-
+                else
+                {
+                    Console.WriteLine("You had to enter a positive number");
+                }
             }
-            Console.WriteLine(Sequence(n));
+
+            Sequence(n);
         }
 
-        static string Sequence(int n)
+        static void Sequence(int n)
         {
-            string str = "";
+            Console.Write(1);
 
-            for (int i = 0; i < n; i++)
+            for (int i = 1; i < n; i++)
             {
-                str += i + 1 + ", ";
+                Console.Write(", " + (i + 1));
             }
 
-            return str.Remove(str.Length - 2);
+            Console.WriteLine();
         }
     }
 }
