@@ -1,31 +1,30 @@
 ﻿using System;
 
-namespace Epam.Task3
+namespace Epam.Task1.Square
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int n = 0;
+            int n;
 
+            Console.WriteLine("Enter size of the square: ");
             while (true)
             {
-                try
+                Console.Write(">> ");
+                if (!int.TryParse(Console.ReadLine(), out n))
                 {
-                    Console.Write(">> ");
-                    n = Convert.ToInt32(Console.ReadLine());
-                    if (n % 2 != 0 && n > 0)
-                    {
-                        break;
-                    }
-                    throw new Exception();
+                    Console.WriteLine("You had to enter a number");
                 }
-                catch
+                else if (n % 2 != 0 && n > 1)
                 {
-                    Console.WriteLine("Нужно нечетное положительное число");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("You had to enter an odd number more than 1");
                 }
             }
-
             Square(n);
 
         }
