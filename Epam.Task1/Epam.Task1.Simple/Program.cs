@@ -1,30 +1,31 @@
 ﻿using System;
 
-namespace Epam.Task1
+namespace Epam.Task1.Simple
 {
     class Program
     {
         static void Main(string[] args)
         {
             int n;
+
+            Console.WriteLine("Enter a number: ");
             while (true)
             {
-                try
+                Console.Write(">> ");
+                if (!int.TryParse(Console.ReadLine(), out n))
                 {
-                    Console.Write(">> ");
-                    n = Convert.ToInt32(Console.ReadLine());
-                    if (n > 0)
-                    {
-                        break;
-                    }
-                    throw new Exception();
+                    Console.WriteLine("You had to enter a number");
                 }
-                catch
+                else if (n > 0)
                 {
-                    Console.WriteLine("Нужно положительное Целое число");
+                    break;
                 }
-
+                else
+                {
+                    Console.WriteLine("You had to enter a positive number");
+                }
             }
+
             Console.WriteLine(Simple(n));
         }
 
@@ -34,7 +35,8 @@ namespace Epam.Task1
             {
                 return false;
             }
-            for (int i = 2; i < n; i++)
+
+            for (int i = 2; i < Math.Sqrt(n); i++)
             {
                 if (n % i == 0)
                 {
