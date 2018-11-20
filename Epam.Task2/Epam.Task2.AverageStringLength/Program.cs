@@ -7,16 +7,25 @@ namespace Epam.Task2.AverageStringLength
         static void Main(string[] args)
         {
             Console.WriteLine("Enter a line of text you like: ");
-            string[] str = Console.ReadLine().Split(new char[] { '.', ',', ':', '-', ' ' });
+            string str = Console.ReadLine();
             float sum = 0f;
-            int amountOfWords = 0;
+            int amountOfWords = 1;
+            bool word = false;
 
             for (int i = 0; i < str.Length; i++)
             {
-                if (!string.IsNullOrEmpty(str[i]))
+                if (char.IsLetter(str[i]))
                 {
-                    sum += str[i].Length;
-                    amountOfWords++;
+                    word = true;
+                    sum++;
+                }
+                else
+                {
+                    if (word)
+                    {
+                        amountOfWords++;
+                    }
+                    word = false;
                 }
             }
             Console.WriteLine("Amount of the words in the line: " + amountOfWords);
