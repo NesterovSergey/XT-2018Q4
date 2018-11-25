@@ -7,17 +7,23 @@ namespace Epam.Task2.CharDoubler
         static void Main(string[] args)
         {
             Console.WriteLine("Enter the first line: ");
-            string firstLine = Console.ReadLine().ToLower();
+            string firstLine = Console.ReadLine();
 
             Console.WriteLine("Enter the second line: ");
-            string secondLine = Console.ReadLine().ToLower();
-
+            string secondLine = Console.ReadLine();
+            
             string currentLetter;
-
             for (int i = 0; i < secondLine.Length; i++)
             {
-                currentLetter = "" + secondLine[i];
-                firstLine = firstLine.Replace(currentLetter, currentLetter + currentLetter);
+                if(firstLine.IndexOf(secondLine[i]) != -1)
+                {
+                    currentLetter = secondLine[i].ToString();
+                    firstLine = firstLine.Replace(currentLetter, currentLetter + currentLetter);
+
+                    secondLine = secondLine.Replace(currentLetter, "");
+                    i--;
+                }
+
             }
             Console.WriteLine("The result: " + firstLine);
         }
