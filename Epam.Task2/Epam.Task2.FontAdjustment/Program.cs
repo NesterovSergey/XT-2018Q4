@@ -54,13 +54,11 @@ namespace Epam.Task2.FontAdjustment
 
                 if (currentFont > 0)
                 {
-                    Console.Write("Current font parameters: ");
-                    Console.WriteLine(currentFont);
+                    Console.WriteLine("Current font parameters: {0}", currentFont);
                 }
                 else if (currentFont == 0)
                 {
-                    Console.Write("Current font parameters: ");
-                    Console.WriteLine("None");
+                    Console.WriteLine("Current font parameters: None");
                 }
                 else
                 {
