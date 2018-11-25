@@ -9,25 +9,28 @@ namespace Epam.Task2.AverageStringLength
             Console.WriteLine("Enter a line of text you like: ");
             string str = Console.ReadLine();
             float sum = 0f;
-            int amountOfWords = 1;
+            int amountOfWords = 0;
             bool word = false;
 
             for (int i = 0; i < str.Length; i++)
             {
                 if (char.IsLetter(str[i]))
                 {
-                    word = true;
                     sum++;
+                    word = true;
                 }
-                else
+                else if (word)
                 {
-                    if (word)
-                    {
-                        amountOfWords++;
-                    }
+                    amountOfWords++;
                     word = false;
                 }
             }
+
+            if (word)
+            {
+                amountOfWords++;
+            }
+
             Console.WriteLine("Amount of the words in the line: " + amountOfWords);
             Console.WriteLine("Average length of the words: " + sum / amountOfWords);
         }
