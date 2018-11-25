@@ -11,7 +11,7 @@ namespace Epam.Task2.Rectangle
 
             while (true)
             {
-                Console.Write("Enter A side \n>> ");
+                Console.Write($"Enter A side {Environment.NewLine}>> ");
                 a = int.Parse(Console.ReadLine());
                 if (a <= 0)
                 {
@@ -19,7 +19,7 @@ namespace Epam.Task2.Rectangle
                     continue;
                 }
 
-                Console.Write("Enter B side \n>> ");
+                Console.Write($"Enter B side {Environment.NewLine}>> ");
                 b = int.Parse(Console.ReadLine());
                 if (b <= 0)
                 {
