@@ -46,7 +46,7 @@ namespace Epam.Task3.Employee
         {
             get
             {
-                return position;
+                return this.position;
             }
 
             set
