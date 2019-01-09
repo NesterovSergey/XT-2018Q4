@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0FEAAA9A-AD0A-489D-AC37-C3351C128526}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Epam.Users.ConsolePL</RootNamespace>
+    <AssemblyName>Epam.Users.ConsolePL</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Epam.Users.ConsolePL.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.Users.BLL.Interface\Epam.Users.BLL.Interface.csproj">
+      <Project>{FA49F619-4DF5-4448-A04B-F53E0E65F96B}</Project>
+      <Name>Epam.Users.BLL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Users.BLL\Epam.Users.BLL.csproj">
+      <Project>{91fb83ce-ebc7-4337-87e3-e933c51743d5}</Project>
+      <Name>Epam.Users.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Users.Common\Epam.Users.Common.csproj">
+      <Project>{B47FD11C-E8A0-4BA6-BC0A-015A9BB29976}</Project>
+      <Name>Epam.Users.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Users.DAL.Interface\Epam.Users.DAL.Interface.csproj">
+      <Project>{F97F9E36-A08D-480B-8C05-44A0CF5B3ED8}</Project>
+      <Name>Epam.Users.DAL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Users.Entities\Epam.Users.Entities.csproj">
+      <Project>{E06D7A43-37B1-4266-AD38-9656358104FF}</Project>
+      <Name>Epam.Users.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
