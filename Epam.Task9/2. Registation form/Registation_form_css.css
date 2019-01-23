@@ -1,0 +1,52 @@
+body{
+	font-family: Helvetica;
+}
+.container{
+	width: 500px;
+	background: #009dfe;
+	border: 5px solid #0085c3;
+}
+.title h1{
+	font-weight: 200;
+	color: white;
+	padding: 10px 20px 0;
+}
+.title{
+	border-bottom: 1px solid white;
+}
+.form{
+	margin: 20px;
+}
+.email{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: white;
+	width: 200px;
+}
+.password{
+	float: left;
+	display: inline-block;
+	color: white;
+	padding-right: 20px;
+}
+.passwordAgain{
+	color: white;
+}
+.submit{
+	padding-top: 5px;
+}
+input[id = email]{
+	margin-top: 2px;
+	width: 425px;
+}
+input[id = password], input[id = passwordAgain]{
+	margin-top: 2px;
+	width: 200px;
+}
+input[type = submit]{
+	margin-top: 30px;
+	padding:5px 10px;
+	background-color: #e2e4ac;
+}
+.form label{
+}
