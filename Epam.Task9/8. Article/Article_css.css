@@ -1,0 +1,35 @@
+body{
+	font-family: helvetica;
+	background-color: black;
+	width: 27%;
+	margin: auto;
+	margin-top: 10px;
+}
+.container{
+	padding: 15px;
+	padding-top: 50px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	background: linear-gradient(#fff, #DDD);
+	border: 2px solid white;
+}
+.wrapper{
+	z-index: 0;
+	margin-left: -20px;
+	padding: 20px 70px;
+	content: " ";
+	position: fixed;
+	background: black;
+	transform: skew(-30deg);
+}
+header{
+	z-index: 1;
+	padding: 0 10px;
+	padding-right: 35px;
+	position: absolute;
+	display:inline-block;
+	color: orange;
+}
+h1{
+	margin: 2px;
+}
