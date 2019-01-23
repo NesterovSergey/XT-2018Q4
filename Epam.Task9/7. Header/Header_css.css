@@ -1,0 +1,12 @@
+header{
+	background-color: #018254;
+	color: white;
+	padding: 10px;
+}
+.container{
+	display: block;
+	background-color: #e5e4e8;
+	margin-top: -5px;
+	margin-left: 25px;
+	padding: 10px;
+}
