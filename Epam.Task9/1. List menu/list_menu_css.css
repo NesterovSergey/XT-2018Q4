@@ -1,0 +1,14 @@
+ul{
+	width: 200px;
+	background: #eae77c;
+	list-style: none;
+	border: 1px solid;
+	border-radius: 10px;
+	box-shadow: 5px 5px #832400;
+	padding: 5px;
+	margin: 0;
+}
+li{
+	color: #832400 ;
+	padding: 3px;
+}
