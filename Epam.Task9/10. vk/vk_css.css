@@ -1,0 +1,158 @@
+*{
+	font-family: roboto, hermetica;
+}
+body{
+	width: 960px;
+	background: #e3e3e6;
+	margin: auto;
+	position: relative;
+}
+header{
+	vertical-align: top;
+	height: 40px;
+	background: #4a76a8;
+}
+h3{
+	font-weight: 400;
+	margin-left: 30px;
+}
+hr{
+	width: 90%;
+
+}
+section{
+	border: 1px solid #e3e6f9;
+	top: 0;
+	position: relative;
+	display: inline-block;
+	width: 550px;
+	background: white;
+}
+nav{
+	vertical-align: top;
+	display: inline-block;
+	color: #4a76a8;
+}
+.Setting_element{
+	padding-left: 30px;
+}
+.leftNav{
+	top: 0;
+	width: 150px;
+	padding: 5px;
+}
+.rightNav{
+	top: 0;
+	width: 200px;
+	padding: 10px;
+	padding-left: 20px;
+	background: white;
+}
+.leftNav:hover{
+	background-color: #cbcccc;
+	cursor: pointer;
+}
+.rightNav:hover{
+	background-color: #e3e6f9;
+	cursor: pointer;
+}
+.img{
+	position: relative;
+	margin: 2px;
+	margin-right: 10px;
+	float: left;
+	width: 25px; 
+	height: 20px;
+	background: url(index.svg) no-repeat;
+}
+.news{
+	background-position: 0 -923px;
+}
+.message{
+	background-position: 0 -27px;
+}
+.friend{
+	background-position: 0 -83px;
+}
+.community{
+	background-position: 0 -110px;
+}
+.photo{
+	background-position: 0 -138px;
+}
+.music{
+	background-position: 0 -167px;
+}
+.video{
+	background-position: 0 -194px;
+}
+.bookmark{
+	background-position: 0 -307px;
+}
+.document{
+	background-position: 0 -280px;
+}
+#General{
+	color: black;
+	border-left: 2px solid #4a76a8;
+	background-color: #e3e6f9;
+}
+.Active_word, .change_field{
+	color: #4a76a8;
+}
+
+.Active_word:hover, .change_field:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+.left_field, .right_field, .change_field, p{
+	display: inline-block;
+}
+.left_field {
+	width: 120px;
+	float: left;
+}
+.right_field{
+	margin-left: 40px;
+}
+.change_field{
+	margin-right: 30px;
+	float: right;
+}
+nav.right{
+	background-color: white;
+}
+.logo{
+	margin-top: 12px;
+	margin-left: 20px;
+	margin-right: 125px;
+	float: left;
+	width: 40px;
+	height: 23px;
+	background: url(vk.jpg) no-repeat;
+}
+.search{
+	display: inline-block;
+	margin-top: 10px;
+}
+.search input{
+	border: 0;
+	padding: 3px;
+	width: 200px;
+	border-radius: 10px;
+	background: #0f48a1;
+	color: #4a88a9;
+}
+.right_field input[type="radio"]{
+	display: inline-block;
+}
+.head{
+	padding-top: 1px;
+	background-color: #f4f6f6;
+	border-bottom: 1px solid gray;
+}
+.Setting_element{
+	margin: 20px 0;
+}
+.user{
+}
