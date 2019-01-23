@@ -1,0 +1,18 @@
+body{
+	background-color: #191919;
+}
+div{
+  	width: 45px; 
+  	height: 30px;
+  	border-radius: 5px 5px 0 0;
+  	margin-right: 5px;
+  	display: inline-block;
+  	background: repeating-linear-gradient(transparent, transparent 26px, #191919 26px, #191919 30px),
+                linear-gradient(to top, #FF8D02, #FFCF57);
+}
+.c1 { height: 150px; }
+.c2 { height: 60px; }
+.c3 { height: 240px; }
+.c4 { height: 300px; }
+.c5 { height: 150px; }
+.c6 { height: 90px; }
