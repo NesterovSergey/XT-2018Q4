@@ -1,0 +1,42 @@
+body{
+	background-color: #225ac7;
+	font-family: ;
+}
+.container{
+	width: 670px;
+	background-color: white;
+	box-shadow: 0 10px 50px black;
+	border-radius: 5px;
+	margin: auto;
+}
+h3{
+	color: orange;
+}
+.element{
+	width: 200px;
+	display: inline-block;
+	margin: 10px;
+	border-left: 1px solid #dcdcdc;
+	text-align: center;
+}
+.element:first-child { border: none; }
+.button{
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: orange;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+}
+.img{
+	width: 61px; 
+	height: 42px;
+	margin: auto;
+	background: url(elements.jpg) no-repeat;
+}
+.cloud{
+	background-position: 0 -42px;
+}
+.stack{
+	background-position: 0 -84px;
+}
