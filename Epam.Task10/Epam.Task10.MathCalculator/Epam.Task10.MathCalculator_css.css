@@ -1,0 +1,25 @@
+header{
+	width: 100%;
+	margin: auto;
+	text-align: center;
+}
+.container{
+	padding: 1%;
+	border: 2px solid #5dd2d4;
+	border-radius: 10px;
+	margin: auto;
+	background: #d7f1f1;
+	width: 30%;
+}
+.label{
+	margin-top: 0;
+}
+#input{
+	display: block;
+	width: 90%;
+}
+#submit{
+	margin-top: 5%;
+	display: block;
+	cursor: pointer;
+}
