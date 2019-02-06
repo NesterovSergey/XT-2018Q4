@@ -2,10 +2,13 @@
 
 namespace Epam.Task1.Simple
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            Console.WriteLine("Epam.Task1.Simple");
+            Console.WriteLine();
+
             int n;
 
             Console.WriteLine("Enter a number: ");
@@ -29,7 +32,7 @@ namespace Epam.Task1.Simple
             Console.WriteLine(Simple(n));
         }
 
-        static bool Simple(int n)
+        public static bool Simple(int n)
         {
             if (n < 2)
             {
@@ -43,6 +46,7 @@ namespace Epam.Task1.Simple
                     return false;
                 }
             }
+
             return true;
         }
     }

@@ -2,10 +2,13 @@
 
 namespace Epam.Task1.Sequence
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            Console.WriteLine("Epam.Task1.Sequence");
+            Console.WriteLine();
+
             int n;
 
             Console.WriteLine("Enter a number: ");
@@ -29,7 +32,7 @@ namespace Epam.Task1.Sequence
             Sequence(n);
         }
 
-        static void Sequence(int n)
+        public static void Sequence(int n)
         {
             Console.Write(1);
 

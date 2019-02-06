@@ -2,10 +2,13 @@
 
 namespace Epam.Task1.Square
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            Console.WriteLine("Epam.Task1.Square");
+            Console.WriteLine();
+
             int n;
 
             Console.WriteLine("Enter size of the square: ");
@@ -25,11 +28,11 @@ namespace Epam.Task1.Square
                     Console.WriteLine("You had to enter an odd number more than 1");
                 }
             }
-            Square(n);
 
+            Square(n);
         }
 
-        static void Square(int n)
+        public static void Square(int n)
         {
             int mid = n / 2;
 
@@ -39,10 +42,9 @@ namespace Epam.Task1.Square
                 {
                     Console.Write(i == mid && j == mid ? "  " : "* ");
                 }
+
                 Console.WriteLine();
             }
         }
-
     }
 }
-
