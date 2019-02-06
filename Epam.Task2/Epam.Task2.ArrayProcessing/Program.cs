@@ -2,9 +2,9 @@
 
 namespace Epam.Task2.ArrayProcessing
 {
-    class Program
+    public class Program
     {
-        static void DeterminationOfMinAndMax(int[] array)
+        public static void DeterminationOfMinAndMax(int[] array)
         {
             int min = array[0];
             int max = array[0];
@@ -15,6 +15,7 @@ namespace Epam.Task2.ArrayProcessing
                 {
                     min = array[i];
                 }
+
                 if (max < array[i])
                 {
                     max = array[i];
@@ -25,7 +26,7 @@ namespace Epam.Task2.ArrayProcessing
             Console.WriteLine("Maximal element of the array: " + max);
         }
 
-        static void Sorting(int[] array)
+        public static void Sorting(int[] array)
         {
             int temporaryElement;
 
@@ -49,15 +50,18 @@ namespace Epam.Task2.ArrayProcessing
             }
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Random rand = new Random();
+            Console.WriteLine("Epam.Task2.ArrayProcessing");
+            Console.WriteLine();
+
             int[] array = new int[11];
 
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = rand.Next(100);
+                array[i] = Randomizer.GenerateInteger(100);
             }
+
             DeterminationOfMinAndMax(array);
             Sorting(array);
         }

@@ -2,34 +2,46 @@
 
 namespace Epam.Task2.Rectangle
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            int a;
-            int b;
+            Console.WriteLine("Epam.Task2.Rectangle");
+            Console.WriteLine();
 
+            CalculateArea();
+        }
+
+        public static void CalculateArea()
+        {
             while (true)
             {
                 Console.Write($"Enter A side {Environment.NewLine}>> ");
-                a = int.Parse(Console.ReadLine());
-                if (a <= 0)
+                if (!int.TryParse(Console.ReadLine(), out int a))
+                {
+                    Console.WriteLine("You have to enter a number");
+                    continue;
+                }
+                else if (a <= 0)
                 {
                     Console.WriteLine("A side equals or less than 0");
                     continue;
                 }
 
                 Console.Write($"Enter B side {Environment.NewLine}>> ");
-                b = int.Parse(Console.ReadLine());
-                if (b <= 0)
+                if (!int.TryParse(Console.ReadLine(), out int b))
+                {
+                    Console.WriteLine("You entered incorrect B side");
+                    continue;
+                }
+                else if (b <= 0)
                 {
                     Console.WriteLine("B side equals or less than 0");
+                    continue;
                 }
-                else
-                {
-                    Console.WriteLine("Area of the rectagle = " + (a * b));
-                    break;
-                }
+
+                Console.WriteLine("Area of the rectagle = " + (a * b));
+                break;
             }
         }
     }

@@ -1,30 +1,40 @@
 ﻿using System;
+using System.Text;
 
 namespace Epam.Task2.CharDoubler
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Epam.Task2.CharDoubler");
+            Console.WriteLine();
+
+            DuplicateLetters();
+        }
+
+        public static void DuplicateLetters()
         {
             Console.WriteLine("Enter the first line: ");
             string firstLine = Console.ReadLine();
+            StringBuilder sb = new StringBuilder(firstLine);
 
             Console.WriteLine("Enter the second line: ");
             string secondLine = Console.ReadLine();
-            
+
             string currentLetter;
             for (int i = 0; i < secondLine.Length; i++)
             {
-                if(firstLine.IndexOf(secondLine[i]) != -1)
+                if (firstLine.IndexOf(secondLine[i]) != -1)
                 {
                     currentLetter = secondLine[i].ToString();
-                    firstLine = firstLine.Replace(currentLetter, currentLetter + currentLetter);
+                    sb.Replace(currentLetter, currentLetter + currentLetter);
 
-                    secondLine = secondLine.Replace(currentLetter, "");
+                    secondLine = secondLine.Replace(currentLetter, string.Empty);
                     i--;
                 }
-
             }
+
             Console.WriteLine("The result: " + firstLine);
         }
     }

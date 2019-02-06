@@ -2,8 +2,10 @@
 
 namespace Epam.Task2.FontAdjustment
 {
-    class Program
+    public class Program
     {
+        private static Options currentFont = 0;
+
         [Flags]
         public enum Options
         {
@@ -12,13 +14,17 @@ namespace Epam.Task2.FontAdjustment
             underline = 4,
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Options currentFont = 0;
-            int x;
-            bool italic = true;
-            bool bold = true;
-            bool underline = true;
+            Console.WriteLine("Epam.Task2.FontAdjustment");
+            Console.WriteLine();
+
+            InteractionWithFont();
+        }
+
+        public static void InteractionWithFont()
+        {
+            string x;
 
             Console.Write($"Current font parameters: None{Environment.NewLine}" +
                           $"Enter: {Environment.NewLine}" +
@@ -29,22 +35,20 @@ namespace Epam.Task2.FontAdjustment
 
             while (true)
             {
-                x = int.Parse(Console.ReadLine());
+                x = Console.ReadLine();
+
                 switch (x)
                 {
-                    case 1:
-                        currentFont = italic ? currentFont + 1 : currentFont - 1;
-                        italic = !italic;
+                    case "1":
+                        currentFont ^= Options.italic;
                         break;
-                    case 2:
-                        currentFont = bold ? currentFont + 2 : currentFont - 2;
-                        bold = !bold;
+                    case "2":
+                        currentFont ^= Options.bold;
                         break;
-                    case 3:
-                        currentFont = underline ? currentFont + 4 : currentFont - 4;
-                        underline = !underline;
+                    case "3":
+                        currentFont ^= Options.underline;
                         break;
-                    case 4:
+                    case "4":
                         currentFont -= 10;
                         break;
                     default:
@@ -52,21 +56,25 @@ namespace Epam.Task2.FontAdjustment
                         break;
                 }
 
-                if (currentFont > 0)
-                {
-                    Console.WriteLine("Current font parameters: {0}", currentFont);
-                }
-                else if (currentFont == 0)
-                {
-                    Console.WriteLine("Current font parameters: None");
-                }
-                else
+                if (currentFont < 0)
                 {
                     break;
                 }
+
+                ShowFonts();
+            }
+        }
+
+        public static void ShowFonts()
+        {
+            if (currentFont > 0)
+            {
+                Console.WriteLine("Current font parameters: {0}", currentFont);
+            }
+            else if (currentFont == 0)
+            {
+                Console.WriteLine("Current font parameters: None");
             }
         }
     }
 }
-
-

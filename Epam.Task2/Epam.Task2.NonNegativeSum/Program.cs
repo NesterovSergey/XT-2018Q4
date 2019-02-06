@@ -2,21 +2,23 @@
 
 namespace Epam.Task2.NonNegativeSum
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static int[] array = new int[10];
+
+        public static void Main(string[] args)
         {
-            Random rand = new Random();
+            Console.WriteLine("Epam.Task2.ArrayProcessing");
+            Console.WriteLine();
 
-            int[] array = new int[10];
+            FillArray();
+            ShowArray();
+            CalculateSumOfPositive();
+        }
+
+        public static void CalculateSumOfPositive()
+        {
             int sum = 0;
-
-            Console.WriteLine("Array:");
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = rand.Next(-10, 10);
-                Console.Write(array[i] + " ");
-            }
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -25,7 +27,26 @@ namespace Epam.Task2.NonNegativeSum
                     sum += array[i];
                 }
             }
+
             Console.WriteLine("\nSum of positive elements in the array: " + sum);
+        }
+
+        public static void FillArray()
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = Randomizer.GenerateInteger(10);
+            }
+        }
+
+        public static void ShowArray()
+        {
+            Console.WriteLine("Array:");
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write("{0} ", array[i]);
+            }
         }
     }
 }

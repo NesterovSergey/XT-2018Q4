@@ -1,18 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Task2.NoPositive
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static int[,,] array = new int[3, 3, 3];
+
+        public static void Main(string[] args)
         {
-            int[,,] array = { { { 1, 2 , 3 }, {-1, -2, -3 }, { - 1, 1, -3} },
-                            { { 1 , 3, - 4 }, { -5, -5, -5}, { -1, 2, 3 } },
-                            { { 1, 1 , -1}, {-1, -2, -3 }, { -3, 1, 2} } };
+            Console.WriteLine("Epam.Task2.NoPositive");
+            Console.WriteLine();
+
+            ToFillArray();
+            ToShowArray();
+            ToDeletePositive();
+            ToShowArray();
+        }
+
+        public static void ToFillArray()
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    for (int q = 0; q < array.GetLength(2); q++)
+                    {
+                        array[i, j, q] = Randomizer.GenerateInteger(10);
+                    }
+                }
+            }
+        }
+
+        public static void ToShowArray()
+        {
+            Console.WriteLine("Your array:");
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    for (int q = 0; q < array.GetLength(2); q++)
+                    {
+                        Console.Write("{0} ", array[i, j, q]);
+                    }
+
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine();
+            }
+        }
+
+        public static void ToDeletePositive()
+        {
+            Console.WriteLine("Deleting positive numbers...");
 
             for (int i = 0; i < array.GetLength(0); i++)
             {
@@ -24,11 +65,8 @@ namespace Epam.Task2.NoPositive
                         {
                             array[i, j, q] = 0;
                         }
-                        Console.Write(array[i, j, q] + " ");
                     }
-                    Console.WriteLine();
                 }
-                Console.WriteLine();
             }
         }
     }

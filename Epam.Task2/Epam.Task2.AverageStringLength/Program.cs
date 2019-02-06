@@ -2,15 +2,24 @@
 
 namespace Epam.Task2.AverageStringLength
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Epam.Task2.AverageStringLength");
+            Console.WriteLine();
+
+            CalculateAverageLength();
+        }
+
+        public static void CalculateAverageLength()
         {
             Console.WriteLine("Enter a line of text you like: ");
             string str = Console.ReadLine();
-            float sum = 0f;
+            double sum = 0;
             int amountOfWords = 0;
             bool word = false;
+            double averageLength;
 
             for (int i = 0; i < str.Length; i++)
             {
@@ -31,8 +40,10 @@ namespace Epam.Task2.AverageStringLength
                 amountOfWords++;
             }
 
+            averageLength = sum / amountOfWords;
+
             Console.WriteLine("Amount of the words in the line: " + amountOfWords);
-            Console.WriteLine("Average length of the words: " + sum / amountOfWords);
+            Console.WriteLine("Average length of the words: " + averageLength);
         }
     }
 }

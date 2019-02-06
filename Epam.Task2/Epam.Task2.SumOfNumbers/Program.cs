@@ -2,21 +2,23 @@
 
 namespace Epam.Task2.SumOfNumbers
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            int sum = 0;
+            Console.WriteLine("Epam.Task2.SumOfNumbers");
+            Console.WriteLine();
 
-            for (int i = 1; i < 1000; i++)
-            {
-                if (i % 3 == 0 || i % 5 == 0)
-                {
-                    sum += i;
-                }
-            }
+            Console.WriteLine("Sum of numbers that divide by 3 or 5 within 1000: {0}", CalculateSumOfNumbers());
+        }
 
-            Console.WriteLine(sum);
+        public static int CalculateSumOfNumbers()
+        {
+            int sumOfTriples = (3 + 999) * 333 / 2;
+            int sumOfFives = (5 + 995) * 199 / 2;
+            int sumOfFifteens = (15 + 990) * 66 / 2;
+
+            return sumOfTriples + sumOfFives - sumOfFifteens;
         }
     }
 }
