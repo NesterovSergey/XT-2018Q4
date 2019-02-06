@@ -9,7 +9,7 @@ namespace Epam.Task6.BackupSystem
         private FileSystemWatcher txtWatcher = new FileSystemWatcher();
         private FileSystemWatcher folderWatcher = new FileSystemWatcher();
 
-        object locker = new object();
+        private object locker = new object();
 
         private string path = AppDomain.CurrentDomain.BaseDirectory;
         private string mainFileName = "ServiceFile.txt";
@@ -20,13 +20,48 @@ namespace Epam.Task6.BackupSystem
         private string type;
         private DateTime currentState;
 
+        public Watcher(string folderPath)
+        {
+            this.stateFileLocation = Path.Combine(this.path, this.stateFileName);
+
+            this.mainFileLocation = Path.Combine(this.path, this.mainFileName);
+
+            this.ToCheckMainFile();
+            this.CurrentState = DateTime.Parse(File.ReadAllText(this.stateFileLocation));
+
+            this.txtWatcher.Path = folderPath;
+            this.folderWatcher.Path = folderPath;
+            this.FolderName = folderPath;
+            this.txtWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.FileName | NotifyFilters.LastWrite;
+
+            this.folderWatcher.NotifyFilter = NotifyFilters.DirectoryName;
+
+            this.folderWatcher.Created += new FileSystemEventHandler(this.ActionEvent);
+            this.folderWatcher.Deleted += new FileSystemEventHandler(this.ActionEvent);
+            this.folderWatcher.Changed += new FileSystemEventHandler(this.ActionEvent);
+            this.folderWatcher.Renamed += new RenamedEventHandler(this.RenameEvent);
+
+            this.txtWatcher.Created += new FileSystemEventHandler(this.ActionEvent);
+            this.txtWatcher.Deleted += new FileSystemEventHandler(this.ActionEvent);
+            this.txtWatcher.Changed += new FileSystemEventHandler(this.ActionEvent);
+            this.txtWatcher.Renamed += new RenamedEventHandler(this.RenameEvent);
+
+            this.txtWatcher.Filter = "*.txt";
+            this.txtWatcher.IncludeSubdirectories = true;
+
+            this.folderWatcher.Filter = "*.*";
+            this.folderWatcher.IncludeSubdirectories = true;
+        }
+
         public string FolderName { get; private set; }
+
         public DateTime CurrentState
         {
             get
             {
-                return currentState;
+                return this.currentState;
             }
+
             set
             {
                 if (value > DateTime.Now)
@@ -34,8 +69,8 @@ namespace Epam.Task6.BackupSystem
                     throw new ArgumentException("Your time cannot be more than the time");
                 }
 
-                File.WriteAllText(Path.Combine(path, stateFileName), DateTime.Now.ToString());
-                currentState = value;
+                File.WriteAllText(Path.Combine(this.path, this.stateFileName), DateTime.Now.ToString());
+                this.currentState = value;
             }
         }
 
@@ -43,101 +78,23 @@ namespace Epam.Task6.BackupSystem
         {
             get
             {
-                return mainFileLocation;
-            }
-            private set
-            { }
-        }
-
-        public Watcher(string folderPath)
-        {
-            stateFileLocation = Path.Combine(path, stateFileName);
-
-            mainFileLocation = Path.Combine(this.path, this.mainFileName);
-
-            ToCheckMainFile();
-            CurrentState = DateTime.Parse(File.ReadAllText(stateFileLocation));
-
-            txtWatcher.Path = folderPath; ;
-            folderWatcher.Path = folderPath;
-            this.FolderName = folderPath;
-            txtWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.FileName | NotifyFilters.LastWrite;
-
-            folderWatcher.NotifyFilter = NotifyFilters.DirectoryName;
-
-            folderWatcher.Created += new FileSystemEventHandler(ActionEvent);
-            folderWatcher.Deleted += new FileSystemEventHandler(ActionEvent);
-            folderWatcher.Changed += new FileSystemEventHandler(ActionEvent);
-            folderWatcher.Renamed += new RenamedEventHandler(RenameEvent);
-
-            txtWatcher.Created += new FileSystemEventHandler(ActionEvent);
-            txtWatcher.Deleted += new FileSystemEventHandler(ActionEvent);
-            txtWatcher.Changed += new FileSystemEventHandler(ActionEvent);
-            txtWatcher.Renamed += new RenamedEventHandler(RenameEvent);
-
-            txtWatcher.Filter = "*.txt";
-            txtWatcher.IncludeSubdirectories = true;
-
-            folderWatcher.Filter = "*.*";
-            folderWatcher.IncludeSubdirectories = true;
-        }
-
-        private void ActionEvent(object sender, FileSystemEventArgs e)
-        {
-            type = e.ChangeType.ToString();
-
-            Output.ShowNewLine(type, e.FullPath);
-            if (sender.GetHashCode() == txtWatcher.GetHashCode())
-            {
-                AppendToFile(type, e.FullPath.Remove(e.FullPath.LastIndexOf('\\')), e.FullPath.Split('\\').Last());
-            }
-            else
-            {
-                AppendToFile(type, e.FullPath);
-            }
-        }
-
-        private void RenameEvent(object sender, RenamedEventArgs e)
-        {
-            type = e.ChangeType.ToString();
-
-            Output.ShowNewLine(type, e.FullPath);
-
-            if (sender.GetHashCode() == txtWatcher.GetHashCode())
-            {
-                AppendToFile(type, e.FullPath.Remove(e.FullPath.LastIndexOf('\\')), e.Name, e.OldName);
-            }
-            else
-            {
-                AppendToFile(type, e.FullPath.Remove(e.FullPath.LastIndexOf('\\')), e.Name, e.OldName, "+");
-            }
-        }
-
-        private void AppendToFile(string currentEvent, string fullPath, string name = "", string oldName = "", string isFolder = "")
-        {
-            var text = string.Join("*", DateTime.Now, currentEvent, fullPath, name, oldName, isFolder);
-            lock (locker)
-            {
-                using (StreamWriter sw = new StreamWriter(mainFileLocation, true))
-                {
-                    sw.WriteLine(text);
-                }
+                return this.mainFileLocation;
             }
         }
 
         public void ToCheckMainFile()
         {
-            if (!File.Exists(mainFileLocation))
+            if (!File.Exists(this.mainFileLocation))
             {
                 Output.ShowNewLine("The main file is lost, it was created a new one");
-                File.Create(mainFileLocation).Close();
+                File.Create(this.mainFileLocation).Close();
             }
 
-            if (!File.Exists(stateFileLocation))
+            if (!File.Exists(this.stateFileLocation))
             {
                 Output.ShowNewLine("The state file is lost, it was created a new one");
-                File.Create(stateFileLocation).Close();
-                File.WriteAllText(stateFileLocation, DateTime.Now.ToString());
+                File.Create(this.stateFileLocation).Close();
+                File.WriteAllText(this.stateFileLocation, DateTime.Now.ToString());
             }
         }
 
@@ -146,15 +103,60 @@ namespace Epam.Task6.BackupSystem
             Output.ShowNewLine("Watcher is launched...");
             Output.ShowNewLine("Enter e to exit");
             Output.ShowLine("Current state is ");
-            Output.ShowNewLine(currentState);
+            Output.ShowNewLine(this.currentState);
 
-            folderWatcher.EnableRaisingEvents = true;
-            txtWatcher.EnableRaisingEvents = true;
+            this.folderWatcher.EnableRaisingEvents = true;
+            this.txtWatcher.EnableRaisingEvents = true;
 
-            while (Input.Read() != "e") { };
+            while (Input.Read() != "e")
+            {
+            };
 
-            folderWatcher.EnableRaisingEvents = false;
-            txtWatcher.EnableRaisingEvents = false;
+            this.folderWatcher.EnableRaisingEvents = false;
+            this.txtWatcher.EnableRaisingEvents = false;
+        }
+
+        private void ActionEvent(object sender, FileSystemEventArgs e)
+        {
+            this.type = e.ChangeType.ToString();
+
+            Output.ShowNewLine(this.type, e.FullPath);
+            if (sender.GetHashCode() == this.txtWatcher.GetHashCode())
+            {
+                this.AppendToFile(this.type, e.FullPath.Remove(e.FullPath.LastIndexOf('\\')), e.FullPath.Split('\\').Last());
+            }
+            else
+            {
+                this.AppendToFile(this.type, e.FullPath);
+            }
+        }
+
+        private void RenameEvent(object sender, RenamedEventArgs e)
+        {
+            this.type = e.ChangeType.ToString();
+
+            Output.ShowNewLine(this.type, e.FullPath);
+
+            if (sender.GetHashCode() == this.txtWatcher.GetHashCode())
+            {
+                this.AppendToFile(this.type, e.FullPath.Remove(e.FullPath.LastIndexOf('\\')), e.Name, e.OldName);
+            }
+            else
+            {
+                this.AppendToFile(this.type, e.FullPath.Remove(e.FullPath.LastIndexOf('\\')), e.Name, e.OldName, "+");
+            }
+        }
+
+        private void AppendToFile(string currentEvent, string fullPath, string name = "", string oldName = "", string isFolder = "")
+        {
+            var text = string.Join("*", DateTime.Now, currentEvent, fullPath, name, oldName, isFolder);
+            lock (this.locker)
+            {
+                using (StreamWriter sw = new StreamWriter(this.mainFileLocation, true))
+                {
+                    sw.WriteLine(text);
+                }
+            }
         }
     }
 }

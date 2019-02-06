@@ -7,10 +7,10 @@ namespace Epam.Task6.BackupSystem
     {
         private string serviceFileLocation;
         private string folderName;
-        Watcher watcher;
-        DateTime date;
+        private Watcher watcher;
+        private DateTime date;
 
-        object locker = new object();
+        private object locker = new object();
 
         public Recover(Watcher watcher)
         {
@@ -30,20 +30,20 @@ namespace Epam.Task6.BackupSystem
                 throw new ArgumentException("Please enter time correct");
             }
 
-            if (date > DateTime.Now)
+            if (this.date > DateTime.Now)
             {
                 throw new Exception("Your cannot be more than current date");
             }
 
-            watcher.CurrentState = date;
+            this.watcher.CurrentState = this.date;
 
-            var allFile = File.ReadAllLines(serviceFileLocation);
+            var allFile = File.ReadAllLines(this.serviceFileLocation);
 
             for (int i = allFile.Length - 1; i >= 0; i--)
             {
                 var line = allFile[i].Split('*');
 
-                if (DateTime.Parse(line[0]) < date)
+                if (DateTime.Parse(line[0]) < this.date)
                 {
                     break;
                 }
@@ -101,7 +101,7 @@ namespace Epam.Task6.BackupSystem
 
         private void ToCheckMainFile()
         {
-            watcher.ToCheckMainFile();
+            this.watcher.ToCheckMainFile();
         }
     }
 }

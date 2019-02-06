@@ -7,7 +7,7 @@ namespace Epam.Task6.BackupSystem
         public static void Main(string[] args)
         {
             Output.ShowNewLine("Epam.Task6.BackupSystem");
-            Output.ShowNewLine("");
+            Output.ShowNewLine(string.Empty);
 
             Watcher watcher = new Watcher("D:\\task5");
             Recover recover = new Recover(watcher);
