@@ -19,14 +19,15 @@ namespace Epam.Task6.BackupSystem
         {
             this.watcher = watcher;
             this.serviceFileLocation = watcher.MainFileLocation;
-            this.folderName = watcher.FolderName;
+            this.folderName = watcher.FolderPath;
         }
 
         public void RunRecover()
         {
             this.watcher.ToCheckMainFile();
 
-            Output.ShowNewLine("Please, enter a date");
+            Output.ShowNewLine("Please, enter a date in format dd.mm.yyyy hh:mm:ss");
+            Output.ShowNewLine("You can leave current time field (hours, minutes or seconds) empty as well");
 
             var readLine = Input.Read();
             try

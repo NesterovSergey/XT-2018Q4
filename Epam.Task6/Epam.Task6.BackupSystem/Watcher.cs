@@ -20,8 +20,10 @@ namespace Epam.Task6.BackupSystem
         private string type;
         private DateTime currentState;
 
-        public Watcher(string folderPath)
+        public Watcher()
         {
+            this.FolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "FolderForTask5");
+
             this.stateFileLocation = Path.Combine(this.path, this.stateFileName);
 
             this.mainFileLocation = Path.Combine(this.path, this.mainFileName);
@@ -29,9 +31,11 @@ namespace Epam.Task6.BackupSystem
             this.ToCheckMainFile();
             this.CurrentState = DateTime.Parse(File.ReadAllText(this.stateFileLocation));
 
-            this.txtWatcher.Path = folderPath;
-            this.folderWatcher.Path = folderPath;
-            this.FolderName = folderPath;
+            this.CreateFolder();
+
+            this.txtWatcher.Path = this.FolderPath;
+            this.folderWatcher.Path = this.FolderPath;
+            this.FolderPath = this.FolderPath;
             this.txtWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.FileName | NotifyFilters.LastWrite;
 
             this.folderWatcher.NotifyFilter = NotifyFilters.DirectoryName;
@@ -53,7 +57,7 @@ namespace Epam.Task6.BackupSystem
             this.folderWatcher.IncludeSubdirectories = true;
         }
 
-        public string FolderName { get; private set; }
+        public string FolderPath { get; private set; }
 
         public DateTime CurrentState
         {
@@ -125,6 +129,15 @@ namespace Epam.Task6.BackupSystem
             File.Delete(this.stateFileLocation);
 
             Output.JumpOnNewLine();
+        }
+
+        private void CreateFolder()
+        {
+            Output.ShowNewLine("Folder was created in the project folder at: ");
+            Output.ShowNewLine(FolderPath);
+            Output.JumpOnNewLine();
+
+            Directory.CreateDirectory(this.FolderPath);
         }
 
         private void ActionEvent(object sender, FileSystemEventArgs e)

@@ -9,7 +9,12 @@ namespace Epam.Task6.BackupSystem
             Output.ShowNewLine("Epam.Task6.BackupSystem");
             Output.ShowNewLine(string.Empty);
 
-            Watcher watcher = new Watcher("D:\\task5");
+            Interaction();
+        }
+
+        public static void Interaction()
+        {
+            Watcher watcher = new Watcher();
             Recover recover = new Recover(watcher);
 
             string readLine;
