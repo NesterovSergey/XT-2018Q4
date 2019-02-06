@@ -22,7 +22,7 @@ namespace Epam.Task6.BackupSystem
 
         public Watcher()
         {
-            this.FolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "FolderForTask5");
+            this.FolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "FolderForTask6");
 
             this.stateFileLocation = Path.Combine(this.path, this.stateFileName);
 
