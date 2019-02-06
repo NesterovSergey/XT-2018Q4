@@ -16,26 +16,21 @@ namespace Epam.Task6.BackupSystem
 
             while (true)
             {
-                Console.WriteLine($"1. Run the watcher {Environment.NewLine}2. Run the recover {Environment.NewLine}Enter something to exit");
+                Console.WriteLine($"1. Run the watcher {Environment.NewLine}2. Run the recover {Environment.NewLine}3. Delete service files {Environment.NewLine}*Enter something to exit");
                 readLine = Input.Read();
 
                 if (readLine == "1")
                 {
-                    watcher.Run();
+                    watcher.RunWatcher();
                 }
                 else if (readLine == "2")
                 {
-                    Output.ShowNewLine("Please, enter a date");
-
-                    readLine = Input.Read();
-                    try
-                    {
-                        recover.ReadFile(readLine);
-                    }
-                    catch (ArgumentException e)
-                    {
-                        Output.ShowNewLine(e.Message);
-                    }
+                    recover.RunRecover();
+                }
+                else if (readLine == "3")
+                {
+                    watcher.DeleteServiceFiles();
+                    Console.WriteLine("Success!");
                 }
                 else
                 {

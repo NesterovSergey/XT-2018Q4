@@ -18,5 +18,10 @@ namespace Epam.Task6.BackupSystem
         {
             Console.WriteLine(element);
         }
+
+        public static void JumpOnNewLine()
+        {
+            Console.WriteLine();
+        }
     }
 }

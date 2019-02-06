@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Epam.Task6.BackupSystem
 {
     public class Recover
     {
+        private const char SYMBOL = '*';
         private string serviceFileLocation;
         private string folderName;
         private Watcher watcher;
@@ -19,15 +22,34 @@ namespace Epam.Task6.BackupSystem
             this.folderName = watcher.FolderName;
         }
 
+        public void RunRecover()
+        {
+            this.watcher.ToCheckMainFile();
+
+            Output.ShowNewLine("Please, enter a date");
+
+            var readLine = Input.Read();
+            try
+            {
+                this.ReadFile(readLine);
+            }
+            catch (ArgumentException e)
+            {
+                Output.ShowNewLine(e.Message);
+            }
+        }
+
         public void ReadFile(string userDate)
         {
+            this.watcher.ToCheckMainFile();
+
             try
             {
                 this.date = DateTime.Parse(userDate);
             }
             catch
             {
-                throw new ArgumentException("Please enter time correct");
+                throw new ArgumentException("Please enter time correctly");
             }
 
             if (this.date > DateTime.Now)
@@ -35,16 +57,22 @@ namespace Epam.Task6.BackupSystem
                 throw new Exception("Your cannot be more than current date");
             }
 
-            this.watcher.CurrentState = this.date;
+            string[] line;
 
-            var allFile = File.ReadAllLines(this.serviceFileLocation);
+            var allFile = File.ReadAllLines(this.serviceFileLocation).ToList();
+            var i = allFile.Count - 1;
 
-            for (int i = allFile.Length - 1; i >= 0; i--)
+            while (i > -1)
             {
-                var line = allFile[i].Split('*');
+                line = allFile[i].Split(SYMBOL);
 
-                if (DateTime.Parse(line[0]) < this.date)
+                if (DateTime.Parse(line[0]) <= this.date)
                 {
+                    this.watcher.CurrentState = this.date;
+
+                    allFile.RemoveRange(i, allFile.Count - i);
+                    File.WriteAllLines(this.serviceFileLocation, allFile);
+
                     break;
                 }
 
@@ -96,6 +124,14 @@ namespace Epam.Task6.BackupSystem
 
                     File.WriteAllText(Path.Combine(line[2], line[3]), "The file was changed");
                 }
+
+                i--;
+            }
+
+            if (i < 0)
+            {
+                this.watcher.CurrentState = DateTime.Now;
+                File.WriteAllText(this.serviceFileLocation, string.Empty);
             }
         }
 

@@ -98,22 +98,33 @@ namespace Epam.Task6.BackupSystem
             }
         }
 
-        public void Run()
+        public void RunWatcher()
         {
             Output.ShowNewLine("Watcher is launched...");
             Output.ShowNewLine("Enter e to exit");
             Output.ShowLine("Current state is ");
             Output.ShowNewLine(this.currentState);
 
+            this.ToCheckMainFile();
+
             this.folderWatcher.EnableRaisingEvents = true;
             this.txtWatcher.EnableRaisingEvents = true;
 
             while (Input.Read() != "e")
             {
-            };
+                Output.ShowNewLine("Enter 'e' to change mode");
+            }
 
             this.folderWatcher.EnableRaisingEvents = false;
             this.txtWatcher.EnableRaisingEvents = false;
+        }
+
+        public void DeleteServiceFiles()
+        {
+            File.Delete(this.mainFileLocation);
+            File.Delete(this.stateFileLocation);
+
+            Output.JumpOnNewLine();
         }
 
         private void ActionEvent(object sender, FileSystemEventArgs e)
