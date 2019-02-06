@@ -6,7 +6,7 @@ namespace Epam.Task8.HtmlReplacer
 {
     public class Program
     {
-        private static readonly string RegString = @"(<.+?>)|(<\/.+?>)";
+        private static readonly string RegString = @"<.+>";
 
         public static void Main(string[] args)
         {

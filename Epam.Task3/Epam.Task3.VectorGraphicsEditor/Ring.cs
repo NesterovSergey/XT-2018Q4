@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Task3.VectorGraphicsEditor
 {
@@ -14,7 +10,7 @@ namespace Epam.Task3.VectorGraphicsEditor
         {
             get
             {
-                return innerRadius;
+                return this.innerRadius;
             }
 
             set
@@ -23,43 +19,43 @@ namespace Epam.Task3.VectorGraphicsEditor
                 {
                     throw new ArgumentException("The inner radius cannot be less or equal 0");
                 }
-                else if (value > Radius)
+                else if (value > base.Radius)
                 {
                     throw new ArgumentException("The inner radius cannot be more than outer radius");
                 }
                 else
                 {
-                    innerRadius = value;
+                    this.innerRadius = value;
                 }
             }
         }
 
-        public double Area => (Math.PI * Radius * Radius) - (Math.PI * innerRadius * innerRadius);
+        public double Area => (Math.PI * base.Radius * base.Radius) - (Math.PI * this.innerRadius * this.innerRadius);
 
         public override void Show()
         {
             Console.WriteLine();
-            Console.WriteLine("X coordinate: {0}", X);
-            Console.WriteLine("Y coordinate: {0}", Y);
-            Console.WriteLine("Round radius: {0}", Radius);
-            Console.WriteLine("Area: {0}", Area);
+            Console.WriteLine("X coordinate: {0}", this.X);
+            Console.WriteLine("Y coordinate: {0}", this.Y);
+            Console.WriteLine("Round radius: {0}", base.Radius);
+            Console.WriteLine("Area: {0}", this.Area);
         }
 
         public override void Create()
         {
             Console.WriteLine($"{Environment.NewLine}Ring!");
             Console.WriteLine("Enter X coordinate: ");
-            X = int.Parse(Console.ReadLine());
+            this.X = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter Y coordinate: ");
-            Y = int.Parse(Console.ReadLine());
+            this.Y = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter a radius: ");
             while (true)
             {
                 try
                 {
-                    Radius = int.Parse(Console.ReadLine());
+                    base.Radius = int.Parse(Console.ReadLine());
 
                     break;
                 }
@@ -75,7 +71,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                 Console.WriteLine("Enter an inner radius: ");
                 try
                 {
-                    InnerRadius = int.Parse(Console.ReadLine());
+                    this.InnerRadius = int.Parse(Console.ReadLine());
 
                     break;
                 }

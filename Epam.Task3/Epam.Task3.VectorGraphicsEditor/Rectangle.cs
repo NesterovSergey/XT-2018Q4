@@ -7,13 +7,13 @@ namespace Epam.Task3.VectorGraphicsEditor
         private int a;
         private int b;
 
-        public int Area => a * b;
+        public int Area => this.a * this.b;
 
         public int A
         {
             get
             {
-                return a;
+                return this.a;
             }
 
             set
@@ -24,7 +24,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                 }
                 else
                 {
-                    a = value;
+                    this.a = value;
                 }
             }
         }
@@ -33,7 +33,7 @@ namespace Epam.Task3.VectorGraphicsEditor
         {
             get
             {
-                return b;
+                return this.b;
             }
 
             set
@@ -44,7 +44,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                 }
                 else
                 {
-                    b = value;
+                    this.b = value;
                 }
             }
         }
@@ -52,9 +52,9 @@ namespace Epam.Task3.VectorGraphicsEditor
         public override void Show()
         {
             Console.WriteLine();
-            Console.WriteLine("First side: {0}", A);
-            Console.WriteLine("Second side: {0}", B);
-            Console.WriteLine("Area: {0}", Area);
+            Console.WriteLine("First side: {0}", this.A);
+            Console.WriteLine("Second side: {0}", this.B);
+            Console.WriteLine("Area: {0}", this.Area);
         }
 
         public override void Create()
@@ -65,7 +65,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                 Console.WriteLine("Enter length of A side: ");
                 try
                 {
-                    A = int.Parse(Console.ReadLine());
+                    this.A = int.Parse(Console.ReadLine());
                     break;
                 }
                 catch (ArgumentException e)
@@ -80,7 +80,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                     Console.WriteLine("Enter length of B side: ");
                     try
                     {
-                        B = int.Parse(Console.ReadLine());
+                        this.B = int.Parse(Console.ReadLine());
                         break;
                     }
                     catch (ArgumentException e)

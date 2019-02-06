@@ -14,14 +14,14 @@ namespace Epam.Task3.VectorGraphicsEditor
         {
             get
             {
-                return radius;
+                return this.radius;
             }
 
             set
             {
                 if (value > 0)
                 {
-                    radius = value;
+                    this.radius = value;
                 }
                 else
                 {

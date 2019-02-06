@@ -8,7 +8,7 @@ namespace Epam.Task3.Ring
 
         public RoundShape()
         {
-            radius = 1;
+            this.radius = 1;
         }
 
         public int X { get; set; }
@@ -19,14 +19,14 @@ namespace Epam.Task3.Ring
         {
             get
             {
-                return radius;
+                return this.radius;
             }
 
             set
             {
                 if (value > 0)
                 {
-                    radius = value;
+                    this.radius = value;
                 }
                 else
                 {
@@ -35,8 +35,8 @@ namespace Epam.Task3.Ring
             }
         }
 
-        public double Area => Math.PI * radius * radius;
+        public double Area => Math.PI * this.radius * this.radius;
 
-        public double Length => 2 * Math.PI * radius;
+        public double Length => 2 * Math.PI * this.radius;
     }
 }

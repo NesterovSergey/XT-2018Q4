@@ -6,34 +6,34 @@ namespace Epam.Task3.MyString
     {
         public MyString()
         {
-            Array = new char[0];
+            this.Array = new char[0];
         }
 
         public MyString(string str)
         {
-            Array = new char[str.Length];
+            this.Array = new char[str.Length];
 
             ////ToCharArray
             for (int i = 0; i < str.Length; i++)
             {
-                Array[i] = str[i];
+                this.Array[i] = str[i];
             }
         }
 
         public char[] Array { get; set; }
 
-        public int Length => Array.Length;
+        public int Length => this.Array.Length;
 
         public char this[int id]
         {
             get
             {
-                return Array[id];
+                return this.Array[id];
             }
 
             set
             {
-                Array[id] = value;
+                this.Array[id] = value;
             }
         }
 
@@ -112,24 +112,6 @@ namespace Epam.Task3.MyString
             }
         }
 
-        public bool Equals(MyString obj)
-        {
-            if (Array.Length != obj.Array.Length)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < obj.Array.Length; i++)
-            {
-                if (Array[i] != obj.Array[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         public static bool operator ==(MyString obj1, MyString obj2)
         {
             if (obj1.Array.Length != obj2.Array.Length)
@@ -166,11 +148,29 @@ namespace Epam.Task3.MyString
             return false;
         }
 
+        public bool Equals(MyString obj)
+        {
+            if (this.Array.Length != obj.Array.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < obj.Array.Length; i++)
+            {
+                if (this.Array[i] != obj.Array[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public int IndexOf(char ch)
         {
-            for (int i = 0; i < Array.Length; i++)
+            for (int i = 0; i < this.Array.Length; i++)
             {
-                if (Array[i] == ch)
+                if (this.Array[i] == ch)
                 {
                     return i;
                 }
@@ -181,7 +181,7 @@ namespace Epam.Task3.MyString
 
         public string MyToString()
         {
-            return Array.ToString();
+            return this.Array.ToString();
         }
     }
 }

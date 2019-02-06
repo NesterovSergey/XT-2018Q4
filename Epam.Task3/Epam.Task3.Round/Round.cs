@@ -14,7 +14,7 @@ namespace Epam.Task3.Round
         {
             get
             {
-                return radius;
+                return this.radius;
             }
 
             set
@@ -24,12 +24,12 @@ namespace Epam.Task3.Round
                     throw new ArgumentException("Radius should be positive");
                 }
 
-                radius = value;
+                this.radius = value;
             }
         }
 
-        public double Area => Math.PI * Radius * Radius;
+        public double Area => Math.PI * this.Radius * this.Radius;
 
-        public double Length => 2 * Math.PI * Radius;
+        public double Length => 2 * Math.PI * this.Radius;
     }
 }

@@ -24,24 +24,24 @@ namespace Epam.Task3.Triangle
             this.b = b;
             this.c = c;
 
-            perimeter = a + b + c;
-            area = GetArea(perimeter);
+            this.perimeter = a + b + c;
+            this.area = this.GetArea(this.perimeter);
         }
 
-        public int A => a;
+        public int A => this.a;
 
-        public int B => b;
+        public int B => this.b;
 
-        public int C => c;
+        public int C => this.c;
 
-        public int Perimeter => perimeter;
+        public int Perimeter => this.perimeter;
 
-        public double Area => area;
+        public double Area => this.area;
 
         private double GetArea(int perimeter)
         {
             double semiPerimeter = perimeter / 2d;
-            return Math.Sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
+            return Math.Sqrt(semiPerimeter * (semiPerimeter - this.a) * (semiPerimeter - this.b) * (semiPerimeter - this.c));
         }
     }
 }

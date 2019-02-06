@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Task3.VectorGraphicsEditor
 {
@@ -19,24 +15,24 @@ namespace Epam.Task3.VectorGraphicsEditor
         public override void Show()
         {
             Console.WriteLine();
-            Console.WriteLine("Coordinates of first point ({0}, {1})", X1, Y1);
-            Console.WriteLine("Coordinates of second point ({0}, {1})", X2, Y2);
+            Console.WriteLine("Coordinates of the first point ({0}, {1})", this.X1, this.Y1);
+            Console.WriteLine("Coordinates of the second point ({0}, {1})", this.X2, this.Y2);
         }
 
         public override void Create()
         {
             Console.WriteLine($"{Environment.NewLine}Line!");
             Console.WriteLine("Enter X1 coordinate: ");
-            X1 = int.Parse(Console.ReadLine());
+            this.X1 = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter Y1 coordinate: ");
-            Y1 = int.Parse(Console.ReadLine());
+            this.Y1 = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter X2 coordinate: ");
-            X2 = int.Parse(Console.ReadLine());
+            this.X2 = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter Y2 coordinate: ");
-            Y2 = int.Parse(Console.ReadLine());
+            this.Y2 = int.Parse(Console.ReadLine());
         }
     }
 }

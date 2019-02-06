@@ -2,15 +2,21 @@
 
 namespace Epam.Task3.Ring
 {
-    public class Ring : RoundShape
+    public class Ring
     {
+        private RoundShape roundShape;
         private double innerRadius;
+
+        public Ring()
+        {
+            this.roundShape = new RoundShape();
+        }
 
         public double InnerRadius
         {
             get
             {
-                return innerRadius;
+                return this.innerRadius;
             }
 
             set
@@ -19,19 +25,19 @@ namespace Epam.Task3.Ring
                 {
                     throw new ArgumentException("The inner radius cannot be less or equal 0");
                 }
-                else if (value > Radius)
+                else if (value > this.roundShape.Radius)
                 {
                     throw new ArgumentException("The inner radius cannot be more than outer radius");
                 }
                 else
                 {
-                    innerRadius = value;
+                    this.innerRadius = value;
                 }
             }
         }
 
-        public new double Area => base.Area - (Math.PI * innerRadius * innerRadius);
+        public new double Area => this.roundShape.Area - (Math.PI * this.innerRadius * this.innerRadius);
 
-        public new double Length => base.Length + (2 * Math.PI * innerRadius);
+        public new double Length => this.roundShape.Length + (2 * Math.PI * this.innerRadius);
     }
 }

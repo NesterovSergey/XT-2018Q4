@@ -9,20 +9,20 @@ namespace Epam.Task3.Employee
         private string secondName;
         private int age;
         private DateTime dateOfBirth;
-        private DateTime now = DateTime.Now;
+        private DateTime now;
 
         public string Name
         {
             get
             {
-                return name;
+                return this.name;
             }
 
             set
             {
-                if (NameCheck(value))
+                if (this.NameCheck(value))
                 {
-                    name = value;
+                    this.name = value;
                 }
                 else
                 {
@@ -35,14 +35,14 @@ namespace Epam.Task3.Employee
         {
             get
             {
-                return secondName;
+                return this.secondName;
             }
 
             set
             {
-                if (NameCheck(value))
+                if (this.NameCheck(value))
                 {
-                    secondName = value;
+                    this.secondName = value;
                 }
                 else
                 {
@@ -55,14 +55,14 @@ namespace Epam.Task3.Employee
         {
             get
             {
-                return lastName;
+                return this.lastName;
             }
 
             set
             {
-                if (NameCheck(value))
+                if (this.NameCheck(value))
                 {
-                    lastName = value;
+                    this.lastName = value;
                 }
                 else
                 {
@@ -75,7 +75,7 @@ namespace Epam.Task3.Employee
         {
             get
             {
-                return dateOfBirth;
+                return this.dateOfBirth;
             }
 
             set
@@ -85,12 +85,13 @@ namespace Epam.Task3.Employee
                     throw new ArgumentException("Your date of birth seems too suspicious");
                 }
 
-                dateOfBirth = value;
-                age = now.Year - dateOfBirth.Year;
+                this.now = DateTime.Now;
+                this.dateOfBirth = value;
+                this.age = this.now.Year - this.dateOfBirth.Year;
 
-                if (dateOfBirth.Month >= now.Month && dateOfBirth.Day >= now.Day)
+                if (this.dateOfBirth.Month >= this.now.Month && this.dateOfBirth.Day >= this.now.Day)
                 {
-                    age++;
+                    this.age++;
                 }
             }
         }
@@ -99,9 +100,9 @@ namespace Epam.Task3.Employee
         {
             get
             {
-                if (age != 0)
+                if (this.age != 0)
                 {
-                    return age;
+                    return this.age;
                 }
                 else
                 {
