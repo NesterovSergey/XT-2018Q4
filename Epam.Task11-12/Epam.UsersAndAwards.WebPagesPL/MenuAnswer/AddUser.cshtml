@@ -1,0 +1,12 @@
+﻿@if (IsAjax)
+{
+<form action="~/Index" method="post">
+    <label for="name">Enter your name:</label>
+    <input name="name" id="name" placeholder="Name" />
+    <label for="date">Enter date of birth:</label>
+    <input name="date" id="date" placeholder="Date" value="" />
+    <label for="image">Choose image: </label>
+    <input name="image" accept=".png, .jpg, .jpeg" id="image" type="file" />
+    <button type="submit" name="AddUser">Submit</button>
+</form>
+}

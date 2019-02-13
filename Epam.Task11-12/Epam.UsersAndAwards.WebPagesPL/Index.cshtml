@@ -1,0 +1,173 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+}
+
+<div id="menu">
+    <p name="AddUser">Add a new user</p>
+    <p name="DeleteUser">Delete user</p>
+    <p name="GetAllUsers">Get all users</p>
+    <p name="AddAward">Add a new award</p>
+    <p name="DeleteAward">Delete award</p>
+    <p name="GetAllAwards">Get all awards</p>
+    <p name="GiveAward">Give an user an award</p>
+    <p name="UpdateUser">Update user</p>
+    <p name="UpdateAward">Update award</p>
+</div>
+<div id="content">
+    <h2>Hola!</h2>
+</div>
+
+@section Scripts{
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    <script>
+        (function () {
+            var $menu = $('#menu'),
+                $content = $('#content');
+
+            var $inputName,
+                $inputAwardId,
+                $inputUserId,
+                $inputDate,
+                $inputImage;
+
+            var data = {};
+
+            var AddUser = "AddUser",
+                DeleteUser = "DeleteUser",
+                GetAllUsers = "GetAllUsers",
+                AddAward = "AddAward",
+                DeleteAward = "DeleteAward",
+                GetAllAwards = "GetAllAwards",
+                GiveAward = "GiveAward",
+                UpdateUser = "UpdateUser",
+                UpdateAward = "UpdateAward";
+
+            var eventSender,
+                formUrl;
+
+            $menu.click(function (event) {
+                eventSender = event.target.getAttribute("name");
+
+                if (eventSender == GetAllUsers || eventSender == GetAllAwards) {
+                    GetAll();
+                }
+                else {
+                    formUrl = "/MenuAnswer/" + eventSender + ".cshtml";
+
+                    $.ajax({
+                        url: formUrl,
+                        success: function (response) {
+                            $content.html(response);
+                        },
+                    })
+
+                    return false;
+                }
+            });
+
+            $content.submit(function (event) {
+                event.preventDefault();
+
+                if (eventSender == AddUser) {
+                    $inputName = $("input[name=name]");
+                    $inputDate = $("input[name=date]");
+                    $inputImage = $("#image")[0].files[0];
+
+                    data = new FormData();
+                    data.append("name", $inputName.val());
+                    data.append("date", $inputDate.val());
+                    data.append("eventSender", eventSender);
+                    data.append("image", $inputImage);
+                }
+                else if (eventSender == DeleteUser) {
+                    $inputUserId = $("input[name=userId]");
+
+                    data = new FormData();
+                    data.append("eventSender", eventSender);
+                    data.append("userId", $inputUserId.val());
+                }
+                else if (eventSender == DeleteAward) {
+                    $inputAwardId = $("input[name=awardId]");
+
+                    data = new FormData();
+
+                    if (confirm("Do you want to delete all awards that users got")) {
+                        data.append("consent", "yes");
+                    }
+                    else {
+                        data.append("consent", "");
+                    }
+
+                    data.append("eventSender", eventSender);
+                    data.append("awardId", $inputAwardId.val());
+                }
+                else if (eventSender == GiveAward) {
+                    $inputAwardId = $("input[name=awardId]");
+                    $inputUserId = $("input[name=userId]");
+
+                    data = new FormData();
+                    data.append("eventSender", eventSender);
+                    data.append("awardId", $inputAwardId.val());
+                    data.append("userId", $inputUserId.val());
+                }
+                else if (eventSender == AddAward) {
+                    $inputName = $("input[name=name]");
+                    $inputImage = $("#image")[0].files[0];
+
+                    data = new FormData();
+                    data.append("image", $inputImage);
+                    data.append("name", $inputName.val());
+                    data.append("eventSender", eventSender);
+                }
+                else if (eventSender == UpdateUser) {
+                    $inputName = $("input[name=name]");
+                    $inputImage = $("#image")[0].files[0];
+                    $inputUserId = $("input[name=userId]");
+                    $inputDate = $("input[name=date]");
+
+                    data = new FormData();
+                    data.append("userId", $inputUserId.val());
+                    data.append("name", $inputName.val());
+                    data.append("date", $inputDate.val());
+                    data.append("eventSender", eventSender);
+                    data.append("image", $inputImage);
+                }
+                else if (eventSender == UpdateAward) {
+                    $inputName = $("input[name=name]");
+                    $inputImage = $("#image")[0].files[0];
+                    $inputAwardId = $("input[name=awardId]");
+
+                    data = new FormData();
+                    data.append("image", $inputImage);
+                    data.append("awardId", $inputAwardId.val());
+                    data.append("name", $inputName.val());
+                    data.append("eventSender", eventSender);
+                }
+
+                $.ajax({
+                    method: "POST",
+                    url: "/InteractionWithLogic",
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $content.html(response);
+                    },
+                })
+            });
+
+            function GetAll() {
+                $.ajax({
+                    method: "POST",
+                    url: "/InteractionWithLogic",
+                    data: {
+                        eventSender: eventSender,
+                    },
+                    success: function (response) {
+                        $content.html(response);
+                    },
+                })
+            }
+        })();
+    </script>
+}

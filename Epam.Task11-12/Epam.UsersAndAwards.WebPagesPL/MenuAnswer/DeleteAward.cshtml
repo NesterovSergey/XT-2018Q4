@@ -1,0 +1,8 @@
+﻿@if (IsAjax)
+{
+    <form action="~/Index" method="post">
+        <label for="awardId">Enter award id you want to delete</label>
+        <input name="awardId" id="awardId" placeholder="Id" value="" />
+        <button type="submit" name="DeleteAward">Submit</button>
+    </form>
+}

@@ -1,0 +1,10 @@
+﻿@if (IsAjax)
+{
+    <form action="~/Index" method="post">
+        <label for="nameId">Enter an id of user you want to award:</label>
+        <input name="userId" id="userId" placeholder="User id" value="" />
+        <label for="awardId">Enter an id of award:</label>
+        <input name="awardId" id="awardId" placeholder="Award id" value="" />
+        <button type="submit" name="GiveAward">Submit</button>
+    </form>
+}

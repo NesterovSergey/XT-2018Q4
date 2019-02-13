@@ -1,0 +1,26 @@
+﻿@if (IsPost)
+{
+    var user = Request["UserName"];
+    var password = Request["Password"];
+
+    if (true)
+    {
+        FormsAuthentication.SetAuthCookie(user, createPersistentCookie: true);
+    }
+    else
+    {
+        Response.Redirect("~/Auth/LogIn");
+        return;
+    }
+
+    Response.Redirect("~");
+    return;
+}
+
+<form action="~/Auth/LogIn" method="post">
+    <label>User name</label>
+    <input type="text" name="UserName" value="" />
+    <label>Password</label>
+    <input type="password" name="Password" value="" />
+    <button>Log In</button>
+</form>

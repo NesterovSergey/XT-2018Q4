@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Epam.Task11</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Style.css">
+</head>
+<body>
+    <header>
+        <h1>Epam.Task11-12</h1>
+    </header>
+
+    <div>
+        @RenderPage("~/Auth/_LoginPartial.cshtml")
+
+        @RenderBody()
+
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

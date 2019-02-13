@@ -1,0 +1,285 @@
+﻿@using Epam.Users.BLL.Interface;
+@using Epam.Users.Common;
+
+@if (IsPost)
+{
+    IUserLogic userLogic = DependencyResolver.UserLogic;
+    IAwardLogic awardLogic = DependencyResolver.AwardLogic;
+    IUserAndAwardlogic userAndAwardLogic = DependencyResolver.UserAndAwardLogic;
+
+    var eventSender = Request.Params["eventSender"];
+
+    if (eventSender == "AddUser")
+    {
+        var name = Request.Params["name"];
+        var date = Request.Params["date"];
+
+        var image = Request.Files;
+        string base64Image;
+
+        if (image.Count > 0)
+        {
+            base64Image = Converter(image[0]);
+        }
+        else
+        {
+            base64Image = null;
+            @:Since you have not selected an image you will receive default image
+        }
+
+        try
+        {
+            userLogic.Add(name, date, base64Image);
+
+            @: <h2>"Success!"</h2>
+        }
+        catch (Exception e)
+        {
+            <h2>Error: @e.Message</h2>
+        }
+
+        return;
+    }
+    else if (eventSender == "DeleteUser")
+    {
+        if (int.TryParse(Request.Params["userId"], out int id))
+        {
+            if (id >= 0)
+            {
+                userLogic.Delete(id);
+                <h2>Deleting is successful</h2>
+            }
+            else
+            {
+                <h2>Error: Id cannot be less than 0</h2>
+            }
+        }
+        else
+        {
+            <h2>Error:You have to enter id correctly</h2>
+        }
+    }
+    else if (eventSender == "GetAllUsers")
+    {
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Date of birth</th>
+                <th>Age</th>
+                <th>Awards</th>
+            </tr>
+            @foreach (var user in userLogic.GetAll())
+            {
+                <tr>
+                    <td>
+                        <img src="data:image/jpg;base64, @user.Image " alt="avatar" />
+                    </td>
+                    <td>
+                        @user.Id
+                    </td>
+                    <td>
+                        @user.Name
+                    </td>
+                    <td>
+                        @user.DateOfBirth.ToString("dd.MM.yyyy")
+                    </td>
+                    <td>
+                        @user.Age
+                    </td>
+                    <td>
+                        @foreach (var award in userAndAwardLogic.GetAll(user.Id))
+                        {
+                            @award
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else if (eventSender == "GetAllAwards")
+    {
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            @foreach (var award in awardLogic.GetAll())
+            {
+                <tr>
+                    <td>
+                        <img src="data:image/jpg;base64, @award.Image" alt="avatar" />
+                    </td>
+                    <td>@award.Id</td>
+                    <td>@award.Title</td>
+                </tr>
+            }
+        </table>
+
+    }
+    else if (eventSender == "AddAward")
+    {
+        var name = Request.Params["name"];
+
+        var image = Request.Files;
+        string base64Image;
+
+        if (image.Count > 0)
+        {
+            base64Image = Converter(image[0]);
+        }
+        else
+        {
+            @:Since you have not selected an image you will receive default image
+            base64Image = null;
+        }
+
+        try
+        {
+            awardLogic.Add(name, base64Image);
+            <h2>SUCCESS!</h2>
+        }
+        catch (Exception e)
+        {
+            <h2>Error: @e.Message</h2>
+        }
+    }
+    else if (eventSender == "DeleteAward")
+    {
+        if (int.TryParse(Request.Params["awardId"], out int id))
+        {
+            bool consent = Request.Params["consent"].IsEmpty()
+                ?false
+                :true;
+
+            if (id >= 0)
+            {
+                awardLogic.Delete(id, consent);
+                <h2>Deleting is successful</h2>
+            }
+            else
+            {
+                <h2>Error: Id cannot be less than 0</h2>
+            }
+        }
+        else
+        {
+            <h2>Error:You have to enter id correctly</h2>
+        }
+    }
+    else if (eventSender == "GiveAward")
+    {
+        if (int.TryParse(Request.Params["userId"], out int userId))
+        {
+            if (int.TryParse(Request.Params["awardId"], out int awardId))
+            {
+                try
+                {
+                    userAndAwardLogic.Add(userId, awardId);
+                    <h2>SUCCESS!</h2>
+                }
+                catch (ArgumentException e)
+                {
+                    <h2>Error: @e.Message</h2>
+                }
+            }
+            else
+            {
+                <h2>Error: You have to enter award id correctly</h2>
+            }
+        }
+        else
+        {
+            <h2>Error: You have to enter user id correctly</h2>
+        }
+    }
+    else if (eventSender == "UpdateUser")
+    {
+        if (int.TryParse(Request.Params["userId"], out int userId))
+        {
+            var newName = Request.Params["name"];
+            var date = Request.Params["date"];
+
+            var image = Request.Files;
+            string base64Image;
+
+            if (image.Count > 0)
+            {
+                base64Image = Converter(image[0]);
+            }
+            else
+            {
+                @:Since you have not selected an image you will receive default image
+                base64Image = null;
+            }
+
+            try
+            {
+                userLogic.Update(userId, newName, date, base64Image);
+                <h2>SUCCESS!</h2>
+            }
+            catch (ArgumentException e)
+            {
+                <h2>Error: @e.Message</h2>
+            }
+        }
+        else
+        {
+            <h2>Error: You have to enter id correctly</h2>
+        }
+    }
+    else if (eventSender == "UpdateAward")
+    {
+        if (int.TryParse(Request.Params["awardId"], out int awardId))
+        {
+            var newTitle = Request.Params["name"];
+
+            var image = Request.Files;
+            string base64Image;
+
+            if (image.Count > 0)
+            {
+                base64Image = Converter(image[0]);
+            }
+            else
+            {
+                @:Since you have not selected an image you will receive default image
+                base64Image = null;
+            }
+
+            try
+            {
+                awardLogic.Update(awardId, newTitle, base64Image);
+                <h2>SUCCESS!</h2>
+            }
+            catch (ArgumentException e)
+            {
+                <h2>Error: @e.Message</h2>
+            }
+        }
+        else
+        {
+            <h2>Error: You have to enter id correctly</h2>
+        }
+    }
+    else
+    {
+        @:I don't know what just happened
+    }
+
+    string Converter(HttpPostedFileBase image)
+    {
+        int fileLength = image.ContentLength;
+        byte[] inputImage = new byte[fileLength];
+
+        image.InputStream.Read(inputImage, 0, fileLength);
+
+        return Convert.ToBase64String(inputImage);
+    }
+}
+else
+{
+    Response.Redirect("~/Index");
+}

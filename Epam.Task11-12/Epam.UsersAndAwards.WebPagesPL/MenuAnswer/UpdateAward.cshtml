@@ -1,0 +1,15 @@
+﻿@if (IsAjax)
+{
+<form action="~/Index" method="post">
+
+    <label for="awardId">Enter award id you want to update:</label>
+    <input name="awardId" id="awardId" placeholder="Id" value="" />
+
+    <label for="name">Enter new award name:</label>
+    <input name="name" id="name" placeholder="New name" value="" />
+    <p class="warning">A title can contain only letters and digits and be not longer than 15 symbols</p>
+    <label for="image">Choose a new image: </label>
+    <input name="image" id="image" accept=".png, .jpg, .jpeg" type="file" />
+    <button type="submit" name="UpdateAward">Submit</button>
+</form>
+}

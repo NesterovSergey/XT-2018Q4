@@ -1,0 +1,12 @@
+﻿@if (IsAjax)
+{
+<form ud="test" action="~/Index" method="post">
+    <label for="name">Enter award name</label>
+    <input name="name" id="name" placeholder="Name" value="" />
+    <p class="warning">A title can contain only letters and digits and be not longer than 15 symbols</p>
+    <label for="date">Choose image: </label>
+    <input name="image" id="image" accept=".png, .jpg, .jpeg" type="file" />
+    <button type="submit" name="AddAward">Submit</button>
+</form>
+}
+

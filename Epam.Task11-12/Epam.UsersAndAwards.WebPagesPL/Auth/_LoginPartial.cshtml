@@ -1,0 +1,8 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <a href="~/Auth/Logout.cshtml">Logout</a>
+}
+else
+{
+    <a href="~/Auth/LogIn.cshtml">Login</a>
+}

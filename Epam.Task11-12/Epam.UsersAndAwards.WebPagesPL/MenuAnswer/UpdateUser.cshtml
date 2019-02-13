@@ -1,0 +1,16 @@
+﻿@if (IsAjax)
+{
+    <form action="~/Index" method="post">
+
+        <label for="userId">Enter user id you want to update:</label>
+        <input name="userId" id="userId" placeholder="Id" value="" />
+
+        <label for="name">Enter new user name:</label>
+        <input name="name" id="name" placeholder="Name" value="" />
+        <label for="date">Enter a new date of birth:</label>
+        <input name="date" id="date" placeholder="Date" value="" />
+        <label for="image">Choose a new image: </label>
+        <input name="image" id="image" accept=".png, .jpg, .jpeg" type="file" />
+        <button type="submit" name="UpdateUser">Submit</button>
+    </form>
+}

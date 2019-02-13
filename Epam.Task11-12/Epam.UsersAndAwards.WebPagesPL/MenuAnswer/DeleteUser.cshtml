@@ -1,0 +1,9 @@
+﻿@if (IsAjax)
+{
+<form action="~/Index" method="post">
+    <label for="userId">Enter user id you want to delete:</label>
+    <input name="userId" id="userId" placeholder="Id" value="" />
+    <button type="submit" name="DeleteUser">Submit</button>
+</form>
+}
+
