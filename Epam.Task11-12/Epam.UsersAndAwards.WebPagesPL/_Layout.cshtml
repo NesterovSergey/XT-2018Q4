@@ -3,15 +3,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Epam.Task11</title>
     <link rel="stylesheet" type="text/css" href="~/Content/Style.css">
+    <title>Epam.Task11</title>
 </head>
 <body>
-    <header>
+    <header id="header">
         <h1>Epam.Task11-12</h1>
     </header>
-
-    <div>
+    <div id="container">
         @RenderPage("~/Auth/_LoginPartial.cshtml")
 
         @RenderBody()
@@ -19,5 +18,6 @@
     </div>
 
     @RenderSection("Scripts", required: false)
+    @RenderPage("/Common.cshtml")
 </body>
 </html>

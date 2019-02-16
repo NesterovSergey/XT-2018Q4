@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Users.DAL.TextFiles", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.UsersAndAwards.WebPagesPL", "Epam.UsersAndAwards.WebPagesPL\Epam.UsersAndAwards.WebPagesPL.csproj", "{1C06CF9A-04EF-4CA3-88D0-AB14E31FFFF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.UsersAndAwards.DAL.SQL", "Epam.UsersAndAwards.DAL.SQL\Epam.UsersAndAwards.DAL.SQL.csproj", "{5795F676-7612-4340-807D-D511DC6ACB6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{1C06CF9A-04EF-4CA3-88D0-AB14E31FFFF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C06CF9A-04EF-4CA3-88D0-AB14E31FFFF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C06CF9A-04EF-4CA3-88D0-AB14E31FFFF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5795F676-7612-4340-807D-D511DC6ACB6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5795F676-7612-4340-807D-D511DC6ACB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5795F676-7612-4340-807D-D511DC6ACB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5795F676-7612-4340-807D-D511DC6ACB6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{0FEAAA9A-AD0A-489D-AC37-C3351C128526} = {0D367F98-597B-482A-833E-83507BEDD135}
 		{C3881ABE-F2DD-46C7-9AC8-44698B39CD3A} = {8519879A-610C-4DC3-90CE-2AE30A046881}
 		{1C06CF9A-04EF-4CA3-88D0-AB14E31FFFF0} = {0D367F98-597B-482A-833E-83507BEDD135}
+		{5795F676-7612-4340-807D-D511DC6ACB6F} = {8519879A-610C-4DC3-90CE-2AE30A046881}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7961EE-C733-4D8E-B340-B0661C3386F7}

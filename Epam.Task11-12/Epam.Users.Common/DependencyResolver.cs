@@ -1,9 +1,9 @@
-﻿using System.Configuration;
-using Epam.Users.BLL;
+﻿using Epam.Users.BLL;
 using Epam.Users.BLL.Interface;
 using Epam.Users.DAL;
 using Epam.Users.DAL.Interface;
 using Epam.Users.DAL.TextFiles;
+using System.Configuration;
 
 namespace Epam.Users.Common
 {
@@ -12,10 +12,12 @@ namespace Epam.Users.Common
         private static IUserDao userDao;
         private static IAwardDao awardDao;
         private static IUserAndAwardDao userAndAwardDao;
+        private static IAccountDao accountDao;
         private static IUserLogic userLogic;
         private static ICacheLogic cacheLogic;
         private static IAwardLogic awardLogic;
         private static IUserAndAwardlogic userAndAwardLogic;
+        private static IAccountLogic accountLogic;
 
         public static IUserDao UserDao
         {
@@ -98,6 +100,31 @@ namespace Epam.Users.Common
             }
         }
 
+        public static IAccountDao AccountDao
+        {
+            get
+            {
+                var key = ConfigurationManager.AppSettings["DaoAccountKey"];
+
+                if (accountDao == null)
+                {
+                    switch (key.ToLower())
+                    {
+                        case "textfiles":
+                            {
+                                accountDao = new FakeAccountDao();
+                                break;
+                            }
+
+                        default:
+                            break;
+                    }
+                }
+
+                return accountDao;
+            }
+        }
+
         public static IUserLogic UserLogic => userLogic ?? (userLogic = new UserLogic(UserDao, CacheLogic));
 
         public static ICacheLogic CacheLogic => cacheLogic ?? (cacheLogic = new CacheLogic());
@@ -105,5 +132,7 @@ namespace Epam.Users.Common
         public static IAwardLogic AwardLogic => awardLogic ?? (awardLogic = new AwardLogic(AwardDao, CacheLogic, UserAndAwardLogic));
 
         public static IUserAndAwardlogic UserAndAwardLogic => userAndAwardLogic ?? (userAndAwardLogic = new UserAndAwardLogic(UserAndAwardDao, UserDao));
+
+        public static IAccountLogic AccountLogic => accountLogic ?? (accountLogic = new AccountLogic(AccountDao, CacheLogic));
     }
 }

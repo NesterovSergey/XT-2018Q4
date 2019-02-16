@@ -4,7 +4,16 @@
     font-size: 18px;
 }
 
+h1, h2 {
+    display: inline-block;
+    width: 500px;
+    margin: 0;
+    padding: 1%;
+}
+
 header {
+    background: #F5F5F5;
+    cursor: pointer;
     width: 100%;
     margin: auto;
     text-align: center;
@@ -18,10 +27,21 @@ header {
     padding: 0 10px;
 }
 
-a {
+.logIn {
+    text-align: right;
+    background: #F5F5F5;
     float: right;
     vertical-align: top;
     margin: 5px;
+}
+
+.nick {
+    padding: 5px;
+    margin-top: 10px;
+}
+
+a {
+    padding: 5px;
     display: inline-block;
 }
 
@@ -31,30 +51,60 @@ p {
     padding: 10px 50px 10px 0;
 }
 
-    #menu > p:hover {
-        cursor: pointer;
-        background: #e3e6f9;
-        color: #4a76a8;
-    }
+#menu > p:hover {
+    cursor: pointer;
+    background: #e3e6f9;
+    color: #4a76a8;
+}
 
 #content {
     vertical-align: top;
+    margin-top: 1%;
     display: inline-block;
 }
-label, input, button{
+
+input, button {
     display: block;
     margin: 10px;
 }
+
 input {
     width: 400px;
     height: 30px;
     font-size: 18px;
 }
-button{
+
+    input[type=radio] {
+        visibility: hidden;
+        display: inline-block;
+        width: 30px;
+        position: relative;
+        margin-bottom: 0;
+    }
+
+        input[type=radio] + label {
+            margin-left: -45px;
+            text-align: center;
+            width: 85px;
+            display: inline-block;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        input[type=radio]:checked + label {
+            background: #e3e6f9;
+        }
+
+button {
     margin-top: 50px;
     width: 100px;
     height: 40px;
 }
+
+form {
+    width: 640px;
+}
+
 td {
     min-width: 50px;
     max-width: 350px;
@@ -62,15 +112,18 @@ td {
     overflow: scroll;
     text-overflow: ellipsis;
 }
-img{
+
+img {
     width: 60px;
     height: 60px;
     display: inline-block;
 }
+
 tr:hover {
     background: #F5F5F5;
 }
-.warning{
+
+.warning {
     margin-left: 10px;
     text-decoration: underline;
 }

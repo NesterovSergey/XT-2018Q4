@@ -11,21 +11,9 @@
     var user = Request["UserName"];
     var password = Request["Password"];
 
-    bool login;
-
     try
     {
-        login = accountLogic.LogIn(user, password);
-
-        if (login)
-        {
-            FormsAuthentication.SetAuthCookie(user, createPersistentCookie: true);
-        }
-        else
-        {
-            Response.Redirect("~/Auth/LogIn");
-            return;
-        }
+        accountLogic.Registration(user, password);
 
         Response.Redirect("~");
     }
@@ -36,20 +24,20 @@
     }
 }
 
-<h2>Log In</h2>
-<form action="~/Auth/LogIn" method="post">
-    <label>User name</label>
+<h2>Registration</h2>
+<form method="post">
+    <label>Choose your nickname: </label>
     <input type="text" name="Username" value="" />
     <label>Password</label>
     <input type="password" name="Password" value="" />
-    <button>Log In</button>
+    <button>Registration</button>
 </form>
-
 <div id="ErrorField"></div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     (function () {
+
         var $inputName,
             $inputPassword;
 
@@ -64,7 +52,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "/Auth/LogIn",
+                url: "/Auth/Registration",
                 data: data,
                 success: function (response) {
                     $("#ErrorField").html(response);

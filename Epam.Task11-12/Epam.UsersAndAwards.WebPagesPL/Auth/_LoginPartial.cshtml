@@ -1,8 +1,12 @@
-﻿@if (User.Identity.IsAuthenticated)
-{
-    <a href="~/Auth/Logout.cshtml">Logout</a>
-}
-else
-{
-    <a href="~/Auth/LogIn.cshtml">Login</a>
-}
+﻿<div class="logIn">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="~/Auth/Logout.cshtml">Logout</a>
+        <div class="nick">@User.Identity.Name</div>
+    }
+    else
+    {
+        <a href="~/Auth/Registration.cshtml">Registration</a>
+        <a href="~/Auth/LogIn.cshtml">Login</a>
+    }
+</div>

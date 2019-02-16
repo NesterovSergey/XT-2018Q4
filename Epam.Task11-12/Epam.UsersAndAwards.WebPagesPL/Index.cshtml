@@ -3,22 +3,32 @@
 }
 
 <div id="menu">
-    <p name="AddUser">Add a new user</p>
-    <p name="DeleteUser">Delete user</p>
     <p name="GetAllUsers">Get all users</p>
-    <p name="AddAward">Add a new award</p>
-    <p name="DeleteAward">Delete award</p>
     <p name="GetAllAwards">Get all awards</p>
-    <p name="GiveAward">Give an user an award</p>
-    <p name="UpdateUser">Update user</p>
-    <p name="UpdateAward">Update award</p>
+    @if (User.IsInRole("user"))
+    {
+        <p name="AddUser">Add a new user</p>
+        <p name="AddAward">Add a new award</p>
+    }
+
+    @if (User.IsInRole("admin"))
+    {
+        <p name="GiveAward">Give an user an award</p>
+        <p name="UpdateUser">Update user</p>
+        <p name="UpdateAward">Update award</p>
+        <p name="DeleteUser">Delete user</p>
+        <p name="DeleteAward">Delete award</p>
+        <p name="GetAllRegisteredUsers">GetAllRegisteredUsers</p>
+        <p name="AssignRole">Assign role</p>
+    }
+
 </div>
 <div id="content">
     <h2>Hola!</h2>
 </div>
 
 @section Scripts{
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
         (function () {
             var $menu = $('#menu'),
@@ -28,7 +38,8 @@
                 $inputAwardId,
                 $inputUserId,
                 $inputDate,
-                $inputImage;
+                $inputImage,
+                $inputRole;
 
             var data = {};
 
@@ -40,7 +51,9 @@
                 GetAllAwards = "GetAllAwards",
                 GiveAward = "GiveAward",
                 UpdateUser = "UpdateUser",
-                UpdateAward = "UpdateAward";
+                UpdateAward = "UpdateAward",
+                AssignRole = "AssignRole",
+                GetAllRegisteredUsers = "GetAllRegisteredUsers";
 
             var eventSender,
                 formUrl;
@@ -48,7 +61,7 @@
             $menu.click(function (event) {
                 eventSender = event.target.getAttribute("name");
 
-                if (eventSender == GetAllUsers || eventSender == GetAllAwards) {
+                if (eventSender == GetAllUsers || eventSender == GetAllAwards || eventSender == GetAllRegisteredUsers) {
                     GetAll();
                 }
                 else {
@@ -76,14 +89,12 @@
                     data = new FormData();
                     data.append("name", $inputName.val());
                     data.append("date", $inputDate.val());
-                    data.append("eventSender", eventSender);
                     data.append("image", $inputImage);
                 }
                 else if (eventSender == DeleteUser) {
                     $inputUserId = $("input[name=userId]");
 
                     data = new FormData();
-                    data.append("eventSender", eventSender);
                     data.append("userId", $inputUserId.val());
                 }
                 else if (eventSender == DeleteAward) {
@@ -98,7 +109,6 @@
                         data.append("consent", "");
                     }
 
-                    data.append("eventSender", eventSender);
                     data.append("awardId", $inputAwardId.val());
                 }
                 else if (eventSender == GiveAward) {
@@ -106,7 +116,6 @@
                     $inputUserId = $("input[name=userId]");
 
                     data = new FormData();
-                    data.append("eventSender", eventSender);
                     data.append("awardId", $inputAwardId.val());
                     data.append("userId", $inputUserId.val());
                 }
@@ -117,7 +126,6 @@
                     data = new FormData();
                     data.append("image", $inputImage);
                     data.append("name", $inputName.val());
-                    data.append("eventSender", eventSender);
                 }
                 else if (eventSender == UpdateUser) {
                     $inputName = $("input[name=name]");
@@ -129,7 +137,6 @@
                     data.append("userId", $inputUserId.val());
                     data.append("name", $inputName.val());
                     data.append("date", $inputDate.val());
-                    data.append("eventSender", eventSender);
                     data.append("image", $inputImage);
                 }
                 else if (eventSender == UpdateAward) {
@@ -141,8 +148,17 @@
                     data.append("image", $inputImage);
                     data.append("awardId", $inputAwardId.val());
                     data.append("name", $inputName.val());
-                    data.append("eventSender", eventSender);
                 }
+                else if (eventSender == AssignRole) {
+                    $inputName = $("input[name=name");
+                    $inputRole = $('input:checked');
+
+                    data = new FormData();
+                    data.append("name", $inputName.val());
+                    data.append("role", $inputRole.val());
+                }
+
+                data.append("eventSender", eventSender);
 
                 $.ajax({
                     method: "POST",

@@ -1,0 +1,14 @@
+﻿@if (IsAjax)
+{
+<form action="~/Index" method="post">
+    <label for="name">Enter name of user:</label>
+    <input name="name" id="name" placeholder="Name" />
+    <input type="radio" id="admin" name="name" value="Admin" />
+    <label for="admin">Admin</label>
+    <input type="radio" id="user" name="name" value="User" checked />
+    <label for="user">User</label>
+    <input type="radio" id="nobody" name="name" value="Nobody" />
+    <label for="nobody">Nobody</label>
+    <button type="submit" name="AssignRole">Submit</button>
+</form>
+}

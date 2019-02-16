@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountLogic.cs" />
     <Compile Include="AwardLogic.cs" />
     <Compile Include="CacheLogic.cs" />
+    <Compile Include="PasswordHashing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAndAwardLogic.cs" />
     <Compile Include="UserLogic.cs" />

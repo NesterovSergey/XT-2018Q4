@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FakeAccountDao.cs" />
     <Compile Include="FakeAwardTextDao.cs" />
     <Compile Include="FakeUserTextDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

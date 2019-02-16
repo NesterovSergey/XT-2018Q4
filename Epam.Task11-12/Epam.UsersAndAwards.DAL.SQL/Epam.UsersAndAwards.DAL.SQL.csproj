@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E06D7A43-37B1-4266-AD38-9656358104FF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epam.Users.Entities</RootNamespace>
-    <AssemblyName>Epam.Users.Entities</AssemblyName>
+    <ProjectGuid>{5795F676-7612-4340-807D-D511DC6ACB6F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Epam.UsersAndAwards.DAL.SQL</RootNamespace>
+    <AssemblyName>Epam.UsersAndAwards.DAL.SQL</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,11 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="Award.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="FakeAccountSqlDao.cs" />
+    <Compile Include="FakeAwardSqlDao.cs" />
+    <Compile Include="FakeUserAndAwardSqlDao.cs" />
+    <Compile Include="FakeUserSqlDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserAndAward.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.Users.DAL.Interface\Epam.Users.DAL.Interface.csproj">
+      <Project>{F97F9E36-A08D-480B-8C05-44A0CF5B3ED8}</Project>
+      <Name>Epam.Users.DAL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Users.Entities\Epam.Users.Entities.csproj">
+      <Project>{E06D7A43-37B1-4266-AD38-9656358104FF}</Project>
+      <Name>Epam.Users.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

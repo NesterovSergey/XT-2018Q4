@@ -52,7 +52,7 @@ namespace Epam.Users.ConsolePL
 
                     try
                     {
-                        userLogic.Add(name, dateOfBirth);
+                        userLogic.Add(name, dateOfBirth, null);
                     }
                     catch (Exception e)
                     {
@@ -103,7 +103,7 @@ namespace Epam.Users.ConsolePL
 
                     try
                     {
-                        awardLogic.Add(title);
+                        awardLogic.Add(title, null);
                     }
                     catch (Exception e)
                     {
@@ -118,7 +118,7 @@ namespace Epam.Users.ConsolePL
                     {
                         if (id >= 0)
                         {
-                            awardLogic.Delete(id);
+                            awardLogic.Delete(id, true);
                             Console.WriteLine("Deleting is successful");
                         }
                         else
