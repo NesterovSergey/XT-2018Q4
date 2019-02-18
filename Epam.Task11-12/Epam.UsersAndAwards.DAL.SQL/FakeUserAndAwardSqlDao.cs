@@ -1,8 +1,8 @@
-﻿using Epam.Users.DAL.Interface;
-using Epam.Users.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using Epam.Users.DAL.Interface;
+using Epam.Users.Entities;
 
 namespace Epam.UsersAndAwards.DAL.SQL
 {

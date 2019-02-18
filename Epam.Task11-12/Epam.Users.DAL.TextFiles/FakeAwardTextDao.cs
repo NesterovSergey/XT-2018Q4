@@ -14,7 +14,7 @@ namespace Epam.Users.DAL.TextFiles
 
         private readonly string name = "Service award file.txt";
 
-        private readonly string DefaultImageAsset = "Default images file.txt";
+        private readonly string defaultImageAsset = "Default images file.txt";
 
         private readonly string fullPath;
 
@@ -47,7 +47,7 @@ namespace Epam.Users.DAL.TextFiles
             {
                 if (award.Image == null)
                 {
-                    string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
+                    string[] lineArray = File.ReadAllLines(Path.Combine(this.domain, this.defaultImageAsset));
                     award.Image = Convert.FromBase64String(lineArray[1]);
                 }
 
@@ -95,14 +95,6 @@ namespace Epam.Users.DAL.TextFiles
             });
         }
 
-        private void CheckFile()
-        {
-            if (!File.Exists(this.fullPath))
-            {
-                File.Create(this.fullPath).Close();
-            }
-        }
-
         public bool Update(int id, string newTitle, byte[] image)
         {
             var awardList = this.GetAll();
@@ -113,9 +105,9 @@ namespace Epam.Users.DAL.TextFiles
                 {
                     if (award.Id == id)
                     {
-                        if(image == null)
+                        if (image == null)
                         {
-                            string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
+                            string[] lineArray = File.ReadAllLines(Path.Combine(this.domain, this.defaultImageAsset));
                             award.Image = Convert.FromBase64String(lineArray[1]);
                         }
                         else
@@ -130,6 +122,14 @@ namespace Epam.Users.DAL.TextFiles
                 }
 
                 return true;
+            }
+        }
+
+        private void CheckFile()
+        {
+            if (!File.Exists(this.fullPath))
+            {
+                File.Create(this.fullPath).Close();
             }
         }
     }

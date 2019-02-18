@@ -1,10 +1,10 @@
-﻿using Epam.Users.DAL.Interface;
-using Epam.Users.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using Epam.Users.DAL.Interface;
+using Epam.Users.Entities;
 
 namespace Epam.UsersAndAwards.DAL.SQL
 {
@@ -19,7 +19,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public void Add(User user)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "AddUser";
@@ -41,7 +41,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public bool Delete(int id)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "DeleteUser";
@@ -61,7 +61,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
         {
             var result = new List<User>();
 
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "GetAllUsers";
@@ -90,7 +90,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
         {
             User user = null;
 
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "GetUserById";
@@ -119,7 +119,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public bool Update(int id, string newName, DateTime newDate, byte[] newImage)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "UpdateUser";
@@ -131,7 +131,10 @@ namespace Epam.UsersAndAwards.DAL.SQL
                 SqlParameter parameterUsername = new SqlParameter("@Username", newName);
                 command.Parameters.Add(parameterUsername);
 
-                SqlParameter parameterDateOfBirth = new SqlParameter("@DateOfBirth", newDate);
+                SqlParameter parameterDateOfBirth = newDate == default(DateTime)
+                    ? new SqlParameter("@DateOfBirth", DBNull.Value)
+                    : new SqlParameter("@DateOfBirth", newDate);
+
                 command.Parameters.Add(parameterDateOfBirth);
 
                 SqlParameter parameterUserImage = new SqlParameter("@UserImage", newImage);

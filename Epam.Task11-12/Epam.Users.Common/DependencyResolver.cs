@@ -1,15 +1,17 @@
-﻿using Epam.Users.BLL;
+﻿using System.Configuration;
+using Epam.Users.BLL;
 using Epam.Users.BLL.Interface;
 using Epam.Users.DAL;
 using Epam.Users.DAL.Interface;
 using Epam.Users.DAL.TextFiles;
 using Epam.UsersAndAwards.DAL.SQL;
-using System.Configuration;
 
 namespace Epam.Users.Common
 {
     public class DependencyResolver
     {
+        private static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["UsersAndAwards"].ConnectionString;
+
         private static IUserDao userDao;
         private static IAwardDao awardDao;
         private static IUserAndAwardDao userAndAwardDao;
@@ -19,8 +21,6 @@ namespace Epam.Users.Common
         private static IAwardLogic awardLogic;
         private static IUserAndAwardlogic userAndAwardLogic;
         private static IAccountLogic accountLogic;
-
-        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["UsersAndAwards"].ConnectionString;
 
         public static IUserDao UserDao
         {
@@ -43,9 +43,10 @@ namespace Epam.Users.Common
                                 userDao = new FakeUserInMemoryDao();
                                 break;
                             }
+
                         case "sql":
                             {
-                                userDao = new FakeUserSqlDao(connectionString);
+                                userDao = new FakeUserSqlDao(ConnectionString);
                                 break;
                             }
 
@@ -73,9 +74,10 @@ namespace Epam.Users.Common
                                 awardDao = new FakeAwardTextDao();
                                 break;
                             }
+
                         case "sql":
                             {
-                                awardDao = new FakeAwardSqlDao(connectionString);
+                                awardDao = new FakeAwardSqlDao(ConnectionString);
                                 break;
                             }
 
@@ -103,9 +105,10 @@ namespace Epam.Users.Common
                                 userAndAwardDao = new FakeUserAndAwardDao();
                                 break;
                             }
+
                         case "sql":
                             {
-                                userAndAwardDao = new FakeUserAndAwardSqlDao(connectionString);
+                                userAndAwardDao = new FakeUserAndAwardSqlDao(ConnectionString);
                                 break;
                             }
 
@@ -133,9 +136,10 @@ namespace Epam.Users.Common
                                 accountDao = new FakeAccountDao();
                                 break;
                             }
+
                         case "sql":
                             {
-                                accountDao = new FakeAccountSqlDao(connectionString);
+                                accountDao = new FakeAccountSqlDao(ConnectionString);
                                 break;
                             }
 

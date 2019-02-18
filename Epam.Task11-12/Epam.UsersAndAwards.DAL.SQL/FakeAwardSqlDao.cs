@@ -1,9 +1,9 @@
-﻿using Epam.Users.DAL.Interface;
-using Epam.Users.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using Epam.Users.DAL.Interface;
+using Epam.Users.Entities;
 
 namespace Epam.UsersAndAwards.DAL.SQL
 {
@@ -18,7 +18,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public void Add(Award award)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "AddAward";
@@ -39,7 +39,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public bool Delete(int id)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
 
@@ -61,7 +61,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
         {
             var result = new List<Award>();
 
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "GetAllAwards";
@@ -89,7 +89,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
         {
             Award award = null;
 
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "GetAwardById";
@@ -117,7 +117,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public bool Update(int id, string newTitle, byte[] newImage)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "UpdateAward";

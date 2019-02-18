@@ -1,16 +1,16 @@
-﻿using Epam.Users.DAL.Interface;
-using Epam.Users.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using Epam.Users.DAL.Interface;
+using Epam.Users.Entities;
 
 namespace Epam.UsersAndAwards.DAL.SQL
 {
     public class FakeAccountSqlDao : IAccountDao
     {
-        private string connectionString;
         private const string DefaultRole = "user";
+        private string connectionString;
 
         public FakeAccountSqlDao(string connectionString)
         {
@@ -21,9 +21,9 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public void AssignRole(string username, string role)
         {
-            Account account = GetAccountByUsername(username);
+            Account account = this.GetAccountByUsername(username);
 
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "AssignRole";
@@ -44,7 +44,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
         {
             var result = new List<Account>();
 
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "GetAllAccounts";
@@ -70,7 +70,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public string GetRole(string username)
         {
-            Account account = GetAccountByUsername(username);
+            Account account = this.GetAccountByUsername(username);
 
             if (account == null)
             {
@@ -82,7 +82,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public string LogIn(string username)
         {
-            Account account = GetAccountByUsername(username);
+            Account account = this.GetAccountByUsername(username);
 
             if (account == null)
             {
@@ -94,13 +94,13 @@ namespace Epam.UsersAndAwards.DAL.SQL
 
         public bool Registration(string username, string password)
         {
-            if (GetAccountByUsername(username) != null)
+            if (this.GetAccountByUsername(username) != null)
             {
                 throw new ArgumentException("Username with this name already exists");
             }
             else
             {
-                using (var sqlConnection = new SqlConnection(connectionString))
+                using (var sqlConnection = new SqlConnection(this.connectionString))
                 {
                     var command = sqlConnection.CreateCommand();
                     command.CommandText = "AddAccount";
@@ -124,7 +124,7 @@ namespace Epam.UsersAndAwards.DAL.SQL
         {
             Account account = null;
 
-            using (var sqlConnection = new SqlConnection(connectionString))
+            using (var sqlConnection = new SqlConnection(this.connectionString))
             {
                 var command = sqlConnection.CreateCommand();
                 command.CommandText = "GetAccountByUsername";

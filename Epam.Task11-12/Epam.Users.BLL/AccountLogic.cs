@@ -1,8 +1,8 @@
-﻿using Epam.Users.BLL.Interface;
+﻿using System;
+using System.Collections.Generic;
+using Epam.Users.BLL.Interface;
 using Epam.Users.DAL.Interface;
 using Epam.Users.Entities;
-using System;
-using System.Collections.Generic;
 
 namespace Epam.Users.BLL
 {
@@ -25,6 +25,7 @@ namespace Epam.Users.BLL
             {
                 return true;
             }
+
             if (string.IsNullOrEmpty(username))
             {
                 throw new ArgumentException("You cannot leave the username field empty");
@@ -43,9 +44,9 @@ namespace Epam.Users.BLL
                 throw new ArgumentException("Your password cannot be less than 5 and more than 20 symbols");
             }
 
-            var HashedPassword = accountDao.LogIn(username.ToLower());
+            var hashedPassword = this.accountDao.LogIn(username.ToLower());
 
-            if (PasswordHashing.VerifyHashedPassword(HashedPassword, password))
+            if (PasswordHashing.VerifyHashedPassword(hashedPassword, password))
             {
                 return true;
             }
@@ -60,7 +61,7 @@ namespace Epam.Users.BLL
                 return "nobody";
             }
 
-            return accountDao.GetRole(username.ToLower());
+            return this.accountDao.GetRole(username.ToLower());
         }
 
         public bool Registration(string username, string password)
@@ -85,8 +86,9 @@ namespace Epam.Users.BLL
 
             password = PasswordHashing.HashPassword(password);
 
-            cacheLogic.Delete(AllAccountsCacheKey);
-            return accountDao.Registration(username.ToLower(), password);
+            this.cacheLogic.Delete(AllAccountsCacheKey);
+
+            return this.accountDao.Registration(username.ToLower(), password);
         }
 
         public void AssignRole(string username, string role)
@@ -105,8 +107,8 @@ namespace Epam.Users.BLL
                 throw new ArgumentException("IT IS IMPOSSIBLE!");
             }
 
-            accountDao.AssignRole(username.ToLower(), role.ToLower());
-            cacheLogic.Delete(AllAccountsCacheKey);
+            this.accountDao.AssignRole(username.ToLower(), role.ToLower());
+            this.cacheLogic.Delete(AllAccountsCacheKey);
         }
 
         public IEnumerable<Account> GetAll()

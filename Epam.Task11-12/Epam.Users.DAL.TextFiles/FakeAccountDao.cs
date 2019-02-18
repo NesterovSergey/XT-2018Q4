@@ -1,9 +1,9 @@
-﻿using Epam.Users.DAL.Interface;
-using Epam.Users.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Epam.Users.DAL.Interface;
+using Epam.Users.Entities;
 
 namespace Epam.Users.DAL.TextFiles
 {
@@ -13,17 +13,17 @@ namespace Epam.Users.DAL.TextFiles
 
         private const string DefaultRole = "user";
 
+        private readonly string fullPath;
+
         private readonly string name = "Service account file.txt";
 
         private object locker;
-
-        private readonly string fullPath;
 
         private string domain = AppDomain.CurrentDomain.BaseDirectory;
 
         public FakeAccountDao()
         {
-            locker = new Object();
+            this.locker = new object();
 
             this.fullPath = Path.Combine(this.domain, this.name);
 
@@ -42,7 +42,7 @@ namespace Epam.Users.DAL.TextFiles
 
         public string LogIn(string username)
         {
-            var list = GetAllLines();
+            var list = this.GetAllLines();
 
             string[] temp;
 
@@ -61,7 +61,7 @@ namespace Epam.Users.DAL.TextFiles
 
         public string GetRole(string username)
         {
-            var list = GetAllLines();
+            var list = this.GetAllLines();
 
             string[] temp;
 
@@ -80,7 +80,7 @@ namespace Epam.Users.DAL.TextFiles
 
         public bool Registration(string username, string password)
         {
-            var list = GetAllLines();
+            var list = this.GetAllLines();
 
             string[] temp;
 
@@ -104,7 +104,7 @@ namespace Epam.Users.DAL.TextFiles
 
         public void AssignRole(string username, string role)
         {
-            string[] list = GetAllLines().ToArray();
+            string[] list = this.GetAllLines().ToArray();
 
             string[] temp;
 
@@ -132,26 +132,6 @@ namespace Epam.Users.DAL.TextFiles
             }
         }
 
-        private IEnumerable<string> GetAllLines()
-        {
-            string[] temp;
-
-            lock (locker)
-            {
-                temp = File.ReadAllLines(this.fullPath);
-            }
-
-            return temp;
-        }
-
-        private void CheckFile()
-        {
-            if (!File.Exists(this.fullPath))
-            {
-                throw new Exception("File is disappeared");
-            }
-        }
-
         public IEnumerable<Account> GetAll()
         {
             string[] lineArray = File.ReadAllLines(this.fullPath);
@@ -166,6 +146,26 @@ namespace Epam.Users.DAL.TextFiles
                     Role = line[2],
                 };
             });
+        }
+
+        private IEnumerable<string> GetAllLines()
+        {
+            string[] temp;
+
+            lock (this.locker)
+            {
+                temp = File.ReadAllLines(this.fullPath);
+            }
+
+            return temp;
+        }
+
+        private void CheckFile()
+        {
+            if (!File.Exists(this.fullPath))
+            {
+                throw new Exception("File is disappeared");
+            }
         }
     }
 }

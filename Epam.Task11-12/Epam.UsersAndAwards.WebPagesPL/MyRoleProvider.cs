@@ -1,7 +1,7 @@
-﻿using Epam.Users.BLL.Interface;
-using Epam.Users.Common;
-using System;
+﻿using System;
 using System.Web.Security;
+using Epam.Users.BLL.Interface;
+using Epam.Users.Common;
 
 namespace Epam.UsersAndAwards.WebPagesPL
 {
@@ -28,7 +28,7 @@ namespace Epam.UsersAndAwards.WebPagesPL
                 return false;
             }
 
-            foreach (var role in GetRolesForUser(username))
+            foreach (var role in this.GetRolesForUser(username))
             {
                 if (role == roleName)
                 {
@@ -41,13 +41,13 @@ namespace Epam.UsersAndAwards.WebPagesPL
 
         public override string[] GetRolesForUser(string username)
         {
-            if (currentName != username || currentName == null)
+            if (this.currentName != username || this.currentName == null)
             {
-                currentName = username;
-                currentRole = accountLogic.GetRole(currentName);
+                this.currentName = username;
+                this.currentRole = accountLogic.GetRole(this.currentName);
             }
 
-            switch (currentRole)
+            switch (this.currentRole)
             {
                 case "admin":
                     return new[] { "admin", "user" };
@@ -61,7 +61,6 @@ namespace Epam.UsersAndAwards.WebPagesPL
         #region IsNotImplemented
 
         public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
 
         public override string[] GetAllRoles()
         {

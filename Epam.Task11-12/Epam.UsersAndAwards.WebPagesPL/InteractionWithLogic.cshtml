@@ -101,7 +101,7 @@
                             <td>
                                 @foreach (var award in userAndAwardLogic.GetAll(user.Id))
                                 {
-                                    @award
+                                <span>@award </span>
                                 }
                             </td>
                         }
@@ -230,7 +230,7 @@
                 userLogic.Update(userId, newName, date, byteImage);
                 <h2>SUCCESS!</h2>
             }
-            catch (ArgumentException e)
+            catch (Exception e)
             {
                 <h2>Error: @e.Message</h2>
             }

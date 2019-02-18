@@ -41,7 +41,7 @@ namespace Epam.Users.DAL.TextFiles
 
         public void Delete(int awardId)
         {
-            string[] userAndAwardList = GetAllAsStringArray();
+            string[] userAndAwardList = this.GetAllAsStringArray();
 
             string[] temp;
 
@@ -61,7 +61,7 @@ namespace Epam.Users.DAL.TextFiles
 
         public IEnumerable<int> GetAll(int id)
         {
-            string[] lineArray = GetAllAsStringArray();
+            string[] lineArray = this.GetAllAsStringArray();
 
             List<int> list = new List<int>();
 
@@ -84,7 +84,7 @@ namespace Epam.Users.DAL.TextFiles
 
         private string[] GetAllAsStringArray()
         {
-            var locker = new Object();
+            var locker = new object();
             string[] arr;
 
             lock (locker)

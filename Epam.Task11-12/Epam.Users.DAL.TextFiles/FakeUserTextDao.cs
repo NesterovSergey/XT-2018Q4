@@ -14,7 +14,7 @@ namespace Epam.Users.DAL.TextFiles
 
         private readonly string name = "Service user file.txt";
 
-        private readonly string DefaultImageAsset = "Default images file.txt";
+        private readonly string defaultImageAsset = "Default images file.txt";
 
         private readonly string fullPath;
 
@@ -45,7 +45,7 @@ namespace Epam.Users.DAL.TextFiles
 
             using (StreamWriter sw = new StreamWriter(this.fullPath, true))
             {
-                string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
+                string[] lineArray = File.ReadAllLines(Path.Combine(this.domain, this.defaultImageAsset));
                 user.Image = Convert.FromBase64String(lineArray[0]);
 
                 sw.WriteLine(user);
@@ -93,14 +93,6 @@ namespace Epam.Users.DAL.TextFiles
             });
         }
 
-        private void CheckFile()
-        {
-            if (!File.Exists(this.fullPath))
-            {
-                File.Create(this.fullPath).Close();
-            }
-        }
-
         public bool Update(int id, string newName, DateTime date, byte[] image)
         {
             var userList = this.GetAll();
@@ -113,7 +105,7 @@ namespace Epam.Users.DAL.TextFiles
                     {
                         if (image.Length == 0)
                         {
-                            string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
+                            string[] lineArray = File.ReadAllLines(Path.Combine(this.domain, this.defaultImageAsset));
                             user.Image = Convert.FromBase64String(lineArray[0]);
                         }
                         else
@@ -125,6 +117,7 @@ namespace Epam.Users.DAL.TextFiles
                         {
                             user.Name = newName;
                         }
+
                         if (date != default(DateTime))
                         {
                             user.DateOfBirth = date;
@@ -135,6 +128,14 @@ namespace Epam.Users.DAL.TextFiles
                 }
 
                 return true;
+            }
+        }
+
+        private void CheckFile()
+        {
+            if (!File.Exists(this.fullPath))
+            {
+                File.Create(this.fullPath).Close();
             }
         }
     }

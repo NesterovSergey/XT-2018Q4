@@ -80,10 +80,10 @@ namespace Epam.Users.BLL
             {
                 throw new ArgumentException("You cannot leave the id field empty");
             }
+
             if (string.IsNullOrEmpty(newTitle))
             {
                 newTitle = null;
-                //throw new ArgumentException("You cannot leave the title field empty");
             }
             else if (!newTitle.All(element => char.IsLetterOrDigit(element)))
             {

@@ -1,5 +1,5 @@
-﻿using Epam.Users.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Epam.Users.Entities;
 
 namespace Epam.Users.BLL.Interface
 {
