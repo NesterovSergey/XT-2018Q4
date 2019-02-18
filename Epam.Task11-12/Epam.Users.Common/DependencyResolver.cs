@@ -3,6 +3,7 @@ using Epam.Users.BLL.Interface;
 using Epam.Users.DAL;
 using Epam.Users.DAL.Interface;
 using Epam.Users.DAL.TextFiles;
+using Epam.UsersAndAwards.DAL.SQL;
 using System.Configuration;
 
 namespace Epam.Users.Common
@@ -18,6 +19,8 @@ namespace Epam.Users.Common
         private static IAwardLogic awardLogic;
         private static IUserAndAwardlogic userAndAwardLogic;
         private static IAccountLogic accountLogic;
+
+        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["UsersAndAwards"].ConnectionString;
 
         public static IUserDao UserDao
         {
@@ -38,6 +41,11 @@ namespace Epam.Users.Common
                         case "memory":
                             {
                                 userDao = new FakeUserInMemoryDao();
+                                break;
+                            }
+                        case "sql":
+                            {
+                                userDao = new FakeUserSqlDao(connectionString);
                                 break;
                             }
 
@@ -65,6 +73,11 @@ namespace Epam.Users.Common
                                 awardDao = new FakeAwardTextDao();
                                 break;
                             }
+                        case "sql":
+                            {
+                                awardDao = new FakeAwardSqlDao(connectionString);
+                                break;
+                            }
 
                         default:
                             break;
@@ -90,6 +103,11 @@ namespace Epam.Users.Common
                                 userAndAwardDao = new FakeUserAndAwardDao();
                                 break;
                             }
+                        case "sql":
+                            {
+                                userAndAwardDao = new FakeUserAndAwardSqlDao(connectionString);
+                                break;
+                            }
 
                         default:
                             break;
@@ -113,6 +131,11 @@ namespace Epam.Users.Common
                         case "textfiles":
                             {
                                 accountDao = new FakeAccountDao();
+                                break;
+                            }
+                        case "sql":
+                            {
+                                accountDao = new FakeAccountSqlDao(connectionString);
                                 break;
                             }
 

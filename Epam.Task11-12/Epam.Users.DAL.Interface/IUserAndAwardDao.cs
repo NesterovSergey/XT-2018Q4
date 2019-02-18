@@ -7,7 +7,7 @@ namespace Epam.Users.DAL.Interface
     {
         void Add(UserAndAward userAndAward);
 
-        IEnumerable<Award> GetAll(User user);
+        IEnumerable<int> GetAll(int id);
 
         void Delete(int id);
     }

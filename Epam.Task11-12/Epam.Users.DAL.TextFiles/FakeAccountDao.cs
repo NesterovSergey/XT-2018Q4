@@ -40,7 +40,7 @@ namespace Epam.Users.DAL.TextFiles
 
         public int Id { get; private set; }
 
-        public string LogIn(string username, string password)
+        public string LogIn(string username)
         {
             var list = GetAllLines();
 

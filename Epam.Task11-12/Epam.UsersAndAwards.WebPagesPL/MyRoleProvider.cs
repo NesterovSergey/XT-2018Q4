@@ -23,6 +23,11 @@ namespace Epam.UsersAndAwards.WebPagesPL
                 return false;
             }
 
+            if (roleName == null)
+            {
+                return false;
+            }
+
             foreach (var role in GetRolesForUser(username))
             {
                 if (role == roleName)

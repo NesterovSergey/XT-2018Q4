@@ -22,7 +22,7 @@ namespace Epam.Users.BLL
             this.userAndAwardlogic = userAndAwardlogic;
         }
 
-        public void Add(string title, string image)
+        public void Add(string title, byte[] image)
         {
             if (string.IsNullOrEmpty(title))
             {
@@ -74,7 +74,7 @@ namespace Epam.Users.BLL
             return cacheResult;
         }
 
-        public void Update(int id, string newTitle, string image)
+        public void Update(int id, string newTitle, byte[] image)
         {
             if (id < 0)
             {
@@ -82,7 +82,8 @@ namespace Epam.Users.BLL
             }
             if (string.IsNullOrEmpty(newTitle))
             {
-                throw new ArgumentException("You cannot leave the title field empty");
+                newTitle = null;
+                //throw new ArgumentException("You cannot leave the title field empty");
             }
             else if (!newTitle.All(element => char.IsLetterOrDigit(element)))
             {

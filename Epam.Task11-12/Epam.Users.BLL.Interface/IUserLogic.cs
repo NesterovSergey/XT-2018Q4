@@ -5,11 +5,11 @@ namespace Epam.Users.BLL.Interface
 {
     public interface IUserLogic
     {
-        void Add(string name, string dateOfBirth, string image);
+        void Add(string name, string dateOfBirth, byte[] image);
 
         void Delete(int id);
 
-        void Update(int id, string newName, string date, string newImage);
+        void Update(int id, string newName, string newDate, byte[] newImage);
 
         IEnumerable<User> GetAll();
     }

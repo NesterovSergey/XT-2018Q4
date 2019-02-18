@@ -1,4 +1,6 @@
-﻿namespace Epam.Users.Entities
+﻿using System;
+
+namespace Epam.Users.Entities
 {
     public class Award
     {
@@ -6,11 +8,11 @@
 
         public string Title { get; set; }
 
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
 
         public override string ToString()
         {
-            return $"{Id} {Title} {Image}";
+            return $"{Id} {Title} {Convert.ToBase64String(Image)}";
         }
     }
 }

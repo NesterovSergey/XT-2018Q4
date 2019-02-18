@@ -10,7 +10,7 @@ namespace Epam.Users.DAL.Interface
 
         bool Delete(int id);
 
-        bool Update(int id, string newName, DateTime date, string image);
+        bool Update(int id, string newName, DateTime date, byte[] image);
 
         User GetById(int id);
 

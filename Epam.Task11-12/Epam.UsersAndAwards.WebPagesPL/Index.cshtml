@@ -18,7 +18,7 @@
         <p name="UpdateAward">Update award</p>
         <p name="DeleteUser">Delete user</p>
         <p name="DeleteAward">Delete award</p>
-        <p name="GetAllRegisteredUsers">GetAllRegisteredUsers</p>
+        <p name="GetAllRegisteredUsers">Get all registered users</p>
         <p name="AssignRole">Assign role</p>
     }
 
@@ -106,7 +106,7 @@
                         data.append("consent", "yes");
                     }
                     else {
-                        data.append("consent", "");
+                        data.append("consent", "no");
                     }
 
                     data.append("awardId", $inputAwardId.val());

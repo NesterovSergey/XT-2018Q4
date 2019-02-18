@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Epam.Users.DAL.Interface;
 using Epam.Users.Entities;
 
@@ -44,11 +45,8 @@ namespace Epam.Users.DAL.TextFiles
 
             using (StreamWriter sw = new StreamWriter(this.fullPath, true))
             {
-                if (user.Image == null)
-                {
-                    string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
-                    user.Image = lineArray[0];
-                }
+                string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
+                user.Image = Convert.FromBase64String(lineArray[0]);
 
                 sw.WriteLine(user);
             }
@@ -90,7 +88,7 @@ namespace Epam.Users.DAL.TextFiles
                     Id = int.Parse(line[0]),
                     Name = line[1],
                     DateOfBirth = DateTime.Parse(line[2]),
-                    Image = line[4],
+                    Image = Convert.FromBase64String(line[4]),
                 };
             });
         }
@@ -103,7 +101,7 @@ namespace Epam.Users.DAL.TextFiles
             }
         }
 
-        public bool Update(int id, string newName, DateTime date, string image)
+        public bool Update(int id, string newName, DateTime date, byte[] image)
         {
             var userList = this.GetAll();
 
@@ -113,10 +111,10 @@ namespace Epam.Users.DAL.TextFiles
                 {
                     if (user.Id == id)
                     {
-                        if (string.IsNullOrEmpty(image))
+                        if (image.Length == 0)
                         {
                             string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
-                            user.Image = lineArray[0];
+                            user.Image = Convert.FromBase64String(lineArray[0]);
                         }
                         else
                         {

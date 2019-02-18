@@ -39,7 +39,7 @@ namespace Epam.Users.DAL.TextFiles
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int awardId)
         {
             string[] userAndAwardList = GetAllAsStringArray();
 
@@ -51,7 +51,7 @@ namespace Epam.Users.DAL.TextFiles
                 {
                     temp = line.Split(Separator);
 
-                    if (id != int.Parse(temp[1]))
+                    if (awardId != int.Parse(temp[1]))
                     {
                         sw.WriteLine($"{temp[0]} {temp[1]}");
                     }
@@ -59,26 +59,23 @@ namespace Epam.Users.DAL.TextFiles
             }
         }
 
-        public IEnumerable<Award> GetAll(User user)
+        public IEnumerable<int> GetAll(int id)
         {
             string[] lineArray = GetAllAsStringArray();
 
-            List<Award> list = new List<Award>();
+            List<int> list = new List<int>();
 
-            Award award;
+            int awardId;
 
             foreach (var line in lineArray)
             {
                 var temp = line.Split(Separator);
 
-                if (int.Parse(temp[0]) == user.Id)
+                if (int.Parse(temp[0]) == id)
                 {
-                    award = new Award()
-                    {
-                        Id = int.Parse(temp[1]),
-                    };
+                    awardId = int.Parse(temp[1]);
 
-                    list.Add(award);
+                    list.Add(awardId);
                 }
             }
 

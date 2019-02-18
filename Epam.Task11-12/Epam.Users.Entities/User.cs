@@ -10,7 +10,7 @@ namespace Epam.Users.Entities
 
         public DateTime DateOfBirth { get; set; }
 
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
 
         public int Age
         {
@@ -33,7 +33,7 @@ namespace Epam.Users.Entities
 
         public override string ToString()
         {
-            return $"{Id} {Name} {DateOfBirth.Date.ToShortDateString()} {Age} {Image}";
+            return $"{Id} {Name} {DateOfBirth.Date.ToShortDateString()} {Age} {Convert.ToBase64String(Image)}";
         }
     }
 }

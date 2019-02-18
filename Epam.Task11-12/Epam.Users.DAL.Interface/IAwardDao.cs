@@ -9,7 +9,7 @@ namespace Epam.Users.DAL.Interface
 
         bool Delete(int id);
 
-        bool Update(int id, string newTitle, string image);
+        bool Update(int id, string newTitle, byte[] image);
 
         Award GetById(int id);
 

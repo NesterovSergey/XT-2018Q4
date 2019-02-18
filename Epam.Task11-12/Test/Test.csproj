@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B47FD11C-E8A0-4BA6-BC0A-015A9BB29976}</ProjectGuid>
+    <ProjectGuid>{794C07A7-D79A-4EA0-A40D-C333D0A11542}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epam.Users.Common</RootNamespace>
-    <AssemblyName>Epam.Users.Common</AssemblyName>
+    <RootNamespace>Test</RootNamespace>
+    <AssemblyName>Test</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -29,9 +31,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,34 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Epam.Users.BLL.Interface\Epam.Users.BLL.Interface.csproj">
-      <Project>{FA49F619-4DF5-4448-A04B-F53E0E65F96B}</Project>
-      <Name>Epam.Users.BLL.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.Users.BLL\Epam.Users.BLL.csproj">
-      <Project>{91fb83ce-ebc7-4337-87e3-e933c51743d5}</Project>
-      <Name>Epam.Users.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.Users.DAL.Interface\Epam.Users.DAL.Interface.csproj">
-      <Project>{F97F9E36-A08D-480B-8C05-44A0CF5B3ED8}</Project>
-      <Name>Epam.Users.DAL.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.Users.DAL.TextFiles\Epam.Users.DAL.TextFiles.csproj">
-      <Project>{C3881ABE-F2DD-46C7-9AC8-44698B39CD3A}</Project>
-      <Name>Epam.Users.DAL.TextFiles</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.Users.DAL\Epam.Users.DAL.csproj">
-      <Project>{068274a1-6860-4803-87d8-e97ecb8445b0}</Project>
-      <Name>Epam.Users.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.UsersAndAwards.DAL.SQL\Epam.UsersAndAwards.DAL.SQL.csproj">
-      <Project>{5795F676-7612-4340-807D-D511DC6ACB6F}</Project>
-      <Name>Epam.UsersAndAwards.DAL.SQL</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

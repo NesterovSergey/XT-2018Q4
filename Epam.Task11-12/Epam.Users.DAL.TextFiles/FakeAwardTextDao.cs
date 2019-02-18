@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Epam.Users.DAL.Interface;
 using Epam.Users.Entities;
 
@@ -47,7 +48,7 @@ namespace Epam.Users.DAL.TextFiles
                 if (award.Image == null)
                 {
                     string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
-                    award.Image = lineArray[1];
+                    award.Image = Convert.FromBase64String(lineArray[1]);
                 }
 
                 sw.WriteLine(award);
@@ -67,9 +68,9 @@ namespace Epam.Users.DAL.TextFiles
                         sw.WriteLine(award);
                     }
                 }
-
-                return true;
             }
+
+            return true;
         }
 
         public Award GetById(int id)
@@ -89,7 +90,7 @@ namespace Epam.Users.DAL.TextFiles
                 {
                     Id = int.Parse(line[0]),
                     Title = line[1],
-                    Image = line[2],
+                    Image = Encoding.ASCII.GetBytes(line[2]),
                 };
             });
         }
@@ -102,7 +103,7 @@ namespace Epam.Users.DAL.TextFiles
             }
         }
 
-        public bool Update(int id, string newTitle, string image)
+        public bool Update(int id, string newTitle, byte[] image)
         {
             var awardList = this.GetAll();
 
@@ -115,7 +116,7 @@ namespace Epam.Users.DAL.TextFiles
                         if(image == null)
                         {
                             string[] lineArray = File.ReadAllLines(Path.Combine(domain, DefaultImageAsset));
-                            award.Image = lineArray[1];
+                            award.Image = Convert.FromBase64String(lineArray[1]);
                         }
                         else
                         {

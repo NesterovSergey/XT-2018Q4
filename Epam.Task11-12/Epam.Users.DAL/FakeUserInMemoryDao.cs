@@ -42,7 +42,7 @@ namespace Epam.Users.DAL
             return repoUsers.Values;
         }
 
-        public bool Update(int id, string newName, DateTime date, string image)
+        public bool Update(int id, string newName, DateTime date, byte[] image)
         {
             throw new NotImplementedException();
         }

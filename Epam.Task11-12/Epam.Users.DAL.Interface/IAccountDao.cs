@@ -7,7 +7,7 @@ namespace Epam.Users.DAL.Interface
     {
         bool Registration(string username, string password);
 
-        string LogIn(string username, string password);
+        string LogIn(string username);
 
         string GetRole(string username);
 

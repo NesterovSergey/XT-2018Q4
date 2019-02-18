@@ -21,7 +21,7 @@ namespace Epam.Users.BLL
 
         public bool LogIn(string username, string password)
         {
-            if(username.ToLower() == "balforn")
+            if (username.ToLower() == "balforn")
             {
                 return true;
             }
@@ -43,9 +43,9 @@ namespace Epam.Users.BLL
                 throw new ArgumentException("Your password cannot be less than 5 and more than 20 symbols");
             }
 
-            string HashedPassword = accountDao.LogIn(username.ToLower(), password);
+            var HashedPassword = accountDao.LogIn(username.ToLower());
 
-            if(PasswordHashing.VerifyHashedPassword(HashedPassword, password))
+            if (PasswordHashing.VerifyHashedPassword(HashedPassword, password))
             {
                 return true;
             }
@@ -55,9 +55,9 @@ namespace Epam.Users.BLL
 
         public string GetRole(string username)
         {
-            if (username.ToLower() == "balforn")
+            if (string.IsNullOrEmpty(username))
             {
-                return "admin";
+                return "nobody";
             }
 
             return accountDao.GetRole(username.ToLower());
@@ -95,14 +95,14 @@ namespace Epam.Users.BLL
             {
                 throw new ArgumentException("You cannot leave the username field empty");
             }
-            else if (username.Length > 15 && username.Length < 1)
+            else if (username.Length > 15 || username.Length < 1)
             {
                 throw new ArgumentException("Your nickname have to be more than 2 and less than 15 symbols");
             }
 
             if (string.IsNullOrEmpty(role))
             {
-                throw new ArgumentException("You cannot leave the role field empty");
+                throw new ArgumentException("IT IS IMPOSSIBLE!");
             }
 
             accountDao.AssignRole(username.ToLower(), role.ToLower());

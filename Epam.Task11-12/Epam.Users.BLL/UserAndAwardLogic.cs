@@ -41,21 +41,14 @@ namespace Epam.Users.BLL
             this.userAndAwardDao.Delete(id);
         }
 
-        public IEnumerable<Award> GetAll(int userId)
+        public IEnumerable<int> GetAll(int userId)
         {
             if (userId < 0)
             {
                 throw new ArgumentException("The id cannot be less than 0");
             }
 
-            var user = this.userDao.GetById(userId);
-
-            if (user == null)
-            {
-                throw new ArgumentException("In list is no user with the id");
-            }
-
-            return this.userAndAwardDao.GetAll(user);
+            return this.userAndAwardDao.GetAll(userId);
         }
     }
 }

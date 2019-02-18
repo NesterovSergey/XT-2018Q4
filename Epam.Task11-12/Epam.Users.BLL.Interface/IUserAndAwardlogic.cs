@@ -7,7 +7,7 @@ namespace Epam.Users.BLL.Interface
     {
         void Add(int userId, int awardId);
 
-        IEnumerable<Award> GetAll(int userId);
+        IEnumerable<int> GetAll(int userId);
 
         void Delete(int id);
     }

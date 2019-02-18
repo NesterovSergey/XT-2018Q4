@@ -20,7 +20,7 @@ namespace Epam.Users.BLL
             this.cacheLogic = cacheLogic;
         }
 
-        public void Add(string name, string dateOfBirth, string image)
+        public void Add(string name, string dateOfBirth, byte[] image)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -81,7 +81,7 @@ namespace Epam.Users.BLL
             return cacheResult;
         }
 
-        public void Update(int id, string newName, string newDateOfBirth, string newImage)
+        public void Update(int id, string newName, string newDateOfBirth, byte[] newImage)
         {
             if (id < 0)
             {
@@ -97,6 +97,11 @@ namespace Epam.Users.BLL
                 throw new ArgumentException("The title cannot be longer than 15 symbols");
             }
 
+            if (string.IsNullOrEmpty(newName))
+            {
+                newName = null;
+            }
+            
             DateTime resultTime;
 
             if (!string.IsNullOrEmpty(newDateOfBirth))

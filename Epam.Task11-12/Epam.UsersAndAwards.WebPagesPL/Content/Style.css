@@ -60,6 +60,7 @@ p {
 #content {
     vertical-align: top;
     margin-top: 1%;
+    width: 600px;
     display: inline-block;
 }
 
@@ -107,6 +108,7 @@ form {
 
 td {
     min-width: 50px;
+    height: 30px;
     max-width: 350px;
     white-space: nowrap;
     overflow: scroll;

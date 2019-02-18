@@ -16,21 +16,21 @@
         var date = Request.Params["date"];
 
         var image = Request.Files;
-        string base64Image;
+        byte[] byteImage;
 
         if (image.Count > 0)
         {
-            base64Image = Converter(image[0]);
+            byteImage = Converter(image[0]);
         }
         else
         {
-            base64Image = null;
+            byteImage = null;
             @:Since you have not selected an image you will receive default image
         }
 
         try
         {
-            userLogic.Add(name, date, base64Image);
+            userLogic.Add(name, date, byteImage);
 
             @: <h2>"Success!"</h2>
         }
@@ -81,7 +81,7 @@
             {
                 <tr>
                     <td>
-                        <img src="data:image/jpg;base64, @user.Image " alt="avatar" />
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(user.Image)" alt="userAvatar" />
                     </td>
                     <td>
                         @user.Id
@@ -97,14 +97,14 @@
                     </td>
 
                     @if (role)
-                    {
-                        <td>
-                            @foreach (var award in userAndAwardLogic.GetAll(user.Id))
-                            {
-                                @award
-                            }
-                        </td>
-                    }
+                        {
+                            <td>
+                                @foreach (var award in userAndAwardLogic.GetAll(user.Id))
+                                {
+                                    @award
+                                }
+                            </td>
+                        }
                 </tr>
             }
         </table>
@@ -115,13 +115,13 @@
             <tr>
                 <th>Image</th>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Title</th>
             </tr>
             @foreach (var award in awardLogic.GetAll())
             {
                 <tr>
                     <td>
-                        <img src="data:image/jpg;base64, @award.Image" alt="avatar" />
+                        <img src="data:image/jpg;base64, @Convert.ToBase64String(award.Image)" alt="awardAvatar" />
                     </td>
                     <td>@award.Id</td>
                     <td>@award.Title</td>
@@ -134,21 +134,21 @@
         var name = Request.Params["name"];
 
         var image = Request.Files;
-        string base64Image;
+        byte[] byteImage;
 
         if (image.Count > 0)
         {
-            base64Image = Converter(image[0]);
+            byteImage = Converter(image[0]);
         }
         else
         {
             @:Since you have not selected an image you will receive default image
-            base64Image = null;
+            byteImage = null;
         }
 
         try
         {
-            awardLogic.Add(name, base64Image);
+            awardLogic.Add(name, byteImage);
             <h2>SUCCESS!</h2>
         }
         catch (Exception e)
@@ -160,7 +160,7 @@
     {
         if (int.TryParse(Request.Params["awardId"], out int id))
         {
-            bool consent = Request.Params["consent"].IsEmpty()
+            bool consent = Request.Params["consent"] == "yes"
             ? false
             : true;
 
@@ -213,21 +213,21 @@
             var date = Request.Params["date"];
 
             var image = Request.Files;
-            string base64Image;
+            byte[] byteImage;
 
             if (image.Count > 0)
             {
-                base64Image = Converter(image[0]);
+                byteImage = Converter(image[0]);
             }
             else
             {
                 @:Since you have not selected an image you will receive default image
-                base64Image = null;
+                byteImage = null;
             }
 
             try
             {
-                userLogic.Update(userId, newName, date, base64Image);
+                userLogic.Update(userId, newName, date, byteImage);
                 <h2>SUCCESS!</h2>
             }
             catch (ArgumentException e)
@@ -247,24 +247,24 @@
             var newTitle = Request.Params["name"];
 
             var image = Request.Files;
-            string base64Image;
+            byte[] byteImage;
 
             if (image.Count > 0)
             {
-                base64Image = Converter(image[0]);
+                byteImage = Converter(image[0]);
             }
             else
             {
                 @:Since you have not selected an image you will receive default image
-                base64Image = null;
+                byteImage = null;
             }
 
             try
             {
-                awardLogic.Update(awardId, newTitle, base64Image);
+                awardLogic.Update(awardId, newTitle, byteImage);
                 <h2>SUCCESS!</h2>
             }
-            catch (ArgumentException e)
+            catch (Exception e)
             {
                 <h2>Error: @e.Message</h2>
             }
@@ -319,14 +319,14 @@
         @:I don't know what just happened
     }
 
-    string Converter(HttpPostedFileBase image)
+    byte[] Converter(HttpPostedFileBase image)
     {
         int fileLength = image.ContentLength;
         byte[] inputImage = new byte[fileLength];
 
         image.InputStream.Read(inputImage, 0, fileLength);
 
-        return Convert.ToBase64String(inputImage);
+        return inputImage;
     }
 }
 else
